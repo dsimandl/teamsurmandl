@@ -1,4 +1,6 @@
 # Django settings for teamsurmandl project.
+import dj_database_url
+
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -151,3 +153,8 @@ LOGGING = {
         },
     }
 }
+
+DATABASES['default'] =  dj_database_url.config()
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
