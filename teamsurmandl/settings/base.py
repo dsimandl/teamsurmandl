@@ -15,6 +15,8 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
+AUTH_USER_MODEL = "profiles.SurmandlUser"
+
 MANAGERS = ADMINS
 
 DATABASES = {
@@ -130,8 +132,10 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = ('south',)
 
+LOCAL_APPS = ('profiles',)
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -163,7 +167,7 @@ LOGGING = {
 }
 
 # Parse database configuration from $DATABASE_URL
-DATABASES['default'] = dj_database_url.config(default='postgres://localhost')
+DATABASES['default'] = dj_database_url.config(default='postgres://localhost/surmandlsite')
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
