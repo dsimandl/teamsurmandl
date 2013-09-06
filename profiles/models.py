@@ -31,7 +31,7 @@ class SurmandlUserManager(BaseUserManager):
 
 
 USERNAME_FIELD = "email"
-REQUIRED_FIELDS = ["",]
+REQUIRED_FIELDS = ["first_name", "last_name", "relation",]
 
 class SurmandlUser(AbstractBaseUser, PermissionsMixin):
 

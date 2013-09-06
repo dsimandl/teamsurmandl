@@ -124,6 +124,7 @@ DJANGO_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -165,6 +166,8 @@ LOGGING = {
         },
     }
 }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap'
 
 # Parse database configuration from $DATABASE_URL
 DATABASES['default'] = dj_database_url.config(default='postgres://localhost/surmandlsite')

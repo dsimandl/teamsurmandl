@@ -6,16 +6,17 @@
 
 {% block page_content %}
 
-
     <div class="container">
     <script type="text/javascript">
         $.backstretch("{{ STATIC_URL }}img/HomePagePic1.jpg");
     </script>
 
-    <form class="form-signin">
+    {% load crispy_forms_tags %}
+        {% crispy form %}
+    <form class="form-signin" action="" method="post">
         <h2 class="form_signin-heading">Please sign in</h2>
-        <input type="text" class="form-control" placeholder="Email address" autofocus/>
-        <input type="password" class="form-control" placeholder="Password" />
+        <input type="text" class="form-control" placeholder="Email address" name="username" autofocus/>
+        <input type="password" class="form-control" placeholder="Password" name="password" />
         <label class="checkbox">
             <input type="checkbox" value="remember-me"> Remember me
         </label>
