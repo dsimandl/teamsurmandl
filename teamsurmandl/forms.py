@@ -3,7 +3,8 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from crispy_forms.layout import Submit, Layout, Field, HTML
+from crispy_forms.bootstrap import FormActions
 
 class SurmandlAuthForm(AuthenticationForm):
 
@@ -13,9 +14,19 @@ class SurmandlAuthForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
         self.helper.form_class = 'form-signin'
+        #This removes all labels from the HTML
+        self.helper.form_show_labels = False
         self.helper.form_method = 'post'
         self.helper._form_action = ''
-        self.helper.add_input(Submit('submit', "Submit"))
+        self.helper.layout = Layout(
+            HTML('<h2 class="form_signin-heading">Please sign in</h2>'),
+            Field('username', css_class='form-control', placeholder="Email address", name="username", autofocus='True'),
+            Field('password', css_class='form-control', placeholder="Password", name="password"),
+            HTML('<label class="checkbox"> <input type="checkbox" value="remember-me"> Remember me</label>'),
+            FormActions(
+                Submit('submit', "Sign in", css_class="btn btn-large btn-primary btn-block")
+            )
+        )
         super(SurmandlAuthForm, self).__init__(*args, **kwargs)
 
     def clean(self):
