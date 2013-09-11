@@ -8,8 +8,16 @@ h2 {
     color: #ffffff;
 }
 
-.form-signin, h2 {
+.form-signin, h2, .alert-danger {
    font-family: 'Cabin', Helvetica, Arial, sans-serif;
+}
+
+.login-alert {
+    padding: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border: 1px solid transparent;
+    border-radius: 4px;
 }
 
 .form-signin{
