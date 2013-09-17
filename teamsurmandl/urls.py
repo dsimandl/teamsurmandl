@@ -2,12 +2,15 @@ from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
-from teamsurmandl.views import HomePageView
+
+from teamsurmandl.views import LoginView, HomePageView
 
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', HomePageView.as_view(), name="login"),
+    url(r'^$', LoginView.as_view(), name="login"),
+    url(r'^home/', HomePageView.as_view(), name="Home"),
+    url(r'^blog/', include("blog.urls", namespace="blog")),
     url(r'^admin/', include(admin.site.urls)),
 )
 
