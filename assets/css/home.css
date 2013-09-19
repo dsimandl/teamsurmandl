@@ -1,0 +1,15 @@
+body {
+    padding-top: 70px;
+}
+
+h1 {
+    font-family: 'Lobster', Helvetica, Arial, sans-serif;
+}
+
+.navbar-brand {
+    font-family: 'Cabin', Helvetica, Arial, sans-serif;
+}
+
+.navbar-fixed-top {
+    border-top: 4px solid #E6399B;
+}
