@@ -3,12 +3,13 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
 
-from teamsurmandl.views import LoginView, HomePageView
+from teamsurmandl.views import LoginView, HomePageView, LogOutView
 
 admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', LoginView.as_view(), name="login"),
+    url(r'^logout/', LogOutView.as_view(), name="logout"),
     url(r'^home/', HomePageView.as_view(), name="Home"),
     url(r'^blog/', include("blog.urls", namespace="blog")),
     url(r'^admin/', include(admin.site.urls)),

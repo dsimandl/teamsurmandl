@@ -41,7 +41,10 @@
                 <a href="#">About the team</a>
             </li>
             <li>
-                <p class="navbar-text pull-right">Signed in as <a href="#">Test Surmandl</a> </p>
+                <p class="navbar-text pull-right">Signed in as <a href="#">{{ user.first_name }} {{ user.last_name }}</a> </p>
+            </li>
+            <li>
+                <a href="{% url 'logout' %}">Logout</a>
             </li>
         </ul>
     </div>

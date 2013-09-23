@@ -46,4 +46,3 @@ class SurmandlAuthForm(AuthenticationForm):
 
         return self.cleaned_data
 
-

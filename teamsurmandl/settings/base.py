@@ -107,6 +107,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+
 ROOT_URLCONF = 'teamsurmandl.urls'
 
 WSGI_APPLICATION = 'teamsurmandl.wsgi.application'
@@ -138,7 +139,9 @@ LOCAL_APPS = ('profiles','blog',)
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
+LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/home/'
+LOGOUT_URL = '/logout/'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
