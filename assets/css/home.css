@@ -6,10 +6,18 @@ h1 {
     font-family: 'Lobster', Helvetica, Arial, sans-serif;
 }
 
-.navbar-brand {
+.navbar, p {
     font-family: 'Cabin', Helvetica, Arial, sans-serif;
 }
 
 .navbar-fixed-top {
     border-top: 4px solid #E6399B;
+}
+
+.carousel {
+    margin-top: -5px;
+}
+
+.carousel .item {
+    height: 400px;
 }
