@@ -1,12 +1,13 @@
 body {
     padding-top: 70px;
+    background: url("../img/cream_dust.png");
 }
 
 h1 {
     font-family: 'Lobster', Helvetica, Arial, sans-serif;
 }
 
-.navbar, p {
+.navbar, p, h2 {
     font-family: 'Cabin', Helvetica, Arial, sans-serif;
 }
 

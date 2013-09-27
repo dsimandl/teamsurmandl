@@ -1,20 +1,16 @@
 import urlparse
 import logging
 from django.views.generic import FormView, TemplateView
-from django.shortcuts import resolve_url
 from django.contrib import auth
-from django.contrib.auth import REDIRECT_FIELD_NAME, login, logout
+from django.contrib.auth import REDIRECT_FIELD_NAME, login
 from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect, HttpResponseGone
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic.base import RedirectView
-from django.shortcuts import redirect
-from django.views.generic.base import TemplateResponseMixin
 from django.conf import settings
 from .forms import SurmandlAuthForm
-from utils import default_redirect
 
 
 logger = logging.getLogger(__name__)
