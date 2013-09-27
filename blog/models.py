@@ -15,6 +15,7 @@ class Post (models.Model):
     slug = models.SlugField(max_length=255, blank=True, default='')
     content = models.TextField()
     published = models.BooleanField(default=True)
+    photo = models.ImageField(upload_to='blog', blank=True)
     author = models.ForeignKey(SurmandlUser, related_name='posts')
 
     def __unicode__(self):
