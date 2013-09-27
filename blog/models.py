@@ -18,6 +18,8 @@ class Post (models.Model):
     photo = models.ImageField(upload_to='blog', blank=True)
     author = models.ForeignKey(SurmandlUser, related_name='posts')
 
+    objects = PostManager()
+
     def __unicode__(self):
         return self.title
 
@@ -28,5 +30,5 @@ class Post (models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('posts:detail', (), {'slug':self.slug})
+        return ('blog:detail', (), {'slug':self.slug})
 
