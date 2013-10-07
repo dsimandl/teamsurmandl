@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import DetailView, UpdateView, ListView
 
 from blog.models import Post
 
@@ -13,7 +13,11 @@ class PostListView(PublishedPostMixin, ListView):
 
     model = Post
 
-
 class PostDetailView(PublishedPostMixin, DetailView):
+
+    model = Post
+
+
+class PostEditView(PublishedPostMixin, UpdateView):
 
     model = Post

@@ -6,10 +6,15 @@
 <h2>Blog Posts</h2>
 
 <ul>
-    {% for post in post_list %}
-    <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
-    {% empty %}
-    <li>Sorry, no posts yet...</li>
-    {% endfor %}
+        {% for post in post_list %}
+            {% if user.is_staff %}
+                <li><a href="{% url "blog:edit_post" pk=post.id %}">edit</a></li>
+                <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+            {% else %}
+                <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+            {% endif %}
+            {% empty %}
+            <li>Sorry, no posts yet...</li>
+            {% endfor %}
 </ul>
 {% endblock %}
