@@ -3,6 +3,10 @@
 {% block page_title %}Blog Posts | {% endblock %}
 
 {% block page_content %}
+
+{% if user.is_staff %}
+
+
 <h2>Blog Posts</h2>
 
 <ul>
