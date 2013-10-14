@@ -5,7 +5,8 @@
 {% block page_content %}
 
 {% if user.is_staff %}
-
+    <li><a href="{% url "blog:create_post" %}">Create</a></li>
+{% endif %}
 
 <h2>Blog Posts</h2>
 

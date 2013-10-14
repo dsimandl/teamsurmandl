@@ -1,7 +1,7 @@
-from django.views.generic import DetailView, UpdateView, ListView
+from django.views.generic import DetailView, UpdateView, ListView, FormView
 
-from blog.models import Post
-
+from .models import Post
+from .forms import PostCreateForm
 
 class PublishedPostMixin(object):
 
@@ -17,6 +17,10 @@ class PostDetailView(PublishedPostMixin, DetailView):
 
     model = Post
 
+class PostCreateView(FormView):
+
+    form_class = PostCreateForm
+    template_name = 'blog/post_create.html'
 
 class PostEditView(PublishedPostMixin, UpdateView):
 
