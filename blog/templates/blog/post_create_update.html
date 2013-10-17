@@ -1,7 +1,8 @@
 {% extends "_layouts/base.html" %}
 
-{% block page_content %}{% csrf_token %}
+{% block page_content %}
     <form action="" method="post">
+    {% csrf_token %}
         {{ form.as_p }}
     <input type="submit" value="Submit" />
     </form>
