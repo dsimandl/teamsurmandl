@@ -11,12 +11,12 @@ class Post (models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
-    title = models.CharField(max_length=255)
+    title = models.CharField('Blog title', max_length=255)
     slug = models.SlugField(max_length=255, blank=True, default='')
-    content = models.TextField()
+    content = models.TextField('Blog post content')
     published = models.BooleanField(default=True)
-    photo = models.ImageField(upload_to='blog', blank=True)
-    author = models.ForeignKey(SurmandlUser, related_name='posts')
+    photo = models.ImageField('Photo for blog post', upload_to='blog', blank=True)
+    author = models.ForeignKey(SurmandlUser, related_name='posts', verbose_name='Author for blog posts')
 
     objects = PostManager()
 
