@@ -16,7 +16,7 @@ class Post (models.Model):
     content = models.TextField('Blog post content')
     published = models.BooleanField(default=True)
     photo = models.ImageField('Photo for blog post', upload_to='blog', blank=True)
-    author = models.ForeignKey(SurmandlUser, related_name='posts', verbose_name='Author for blog posts')
+    author = models.ForeignKey(SurmandlUser, limit_choices_to={'is_staff':True},related_name='posts', verbose_name='Author for blog posts')
 
     objects = PostManager()
 
