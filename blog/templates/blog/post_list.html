@@ -31,18 +31,18 @@
                         <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
                     </h1>
                     <p class="lead">
-                        by Blog Author
+                        by {{ post.author }}
                     </p>
                     <hr>
                     <p>
                         <!--Find a good time icon for here -->
                         <i class="glyphicon-time">
-                            Posted on Aug 31 2008
+                            Posted on {{ post.created_at }}
                         </i>
                     </p>
                     <hr>
                     <p>
-                        Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before.
+                        {{ post.content }}
                     </p>
                     <a class="btn btn-primary" href="{{ post.get_absolute_url }}">Read More</a>
                 {% empty %}

@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 from django.http import HttpResponseRedirect
 from django.core.exceptions import ImproperlyConfigured
+from django.template.defaultfilters import slugify
 
 from .models import Post
 from .forms import PostCreateForm
@@ -74,6 +75,7 @@ class PostCreateView(FormView):
         return super(PostCreateView, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
+        form.fields['slug'] = slugify(form.fields['title'])
         self.object = form.save()
         return HttpResponseRedirect(self.get_success_url())
 
