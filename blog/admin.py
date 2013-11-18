@@ -1,5 +1,5 @@
 from django.contrib import admin
-from blog.models import Post
+from blog.models import Post, PostComment
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -14,3 +14,11 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ['title', 'content']
 
 admin.site.register(Post, PostAdmin)
+
+
+class PostCommentAdmin(admin.ModelAdmin):
+
+    date_hierarchy = 'created_at'
+    fields = ('post', 'author', 'comment')
+
+admin.site.register(PostComment, PostCommentAdmin)
