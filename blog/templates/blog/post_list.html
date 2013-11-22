@@ -28,11 +28,7 @@
             <h1>
                 {% for post in post_list %}
                     <h1 id="blog_title">
-                        {% if user.is_staff %}
-                            <a href="edit{{ post.get_absolute_url }}">{{ post.title }}</a>
-                        {% else %}
                             <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-                        {% endif %}
                     </h1>
                     <p class="lead">
                         by {{ post.author }}
@@ -48,11 +44,7 @@
                     <p>
                         {{ post.content }}
                     </p>
-                    {% if user.is_staff %}
-                        <a class="btn btn-primary" href="edit{{ post.get_absolute_url }}">Read More</a>
-                    {% else %}
                         <a class="btn btn-primary" href="{{ post.get_absolute_url }}">Read More</a>
-                    {% endif %}
                 {% empty %}
                 <li>Sorry, no posts yet...</li>
                 {% endfor %}
