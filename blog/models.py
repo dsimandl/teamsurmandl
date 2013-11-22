@@ -37,10 +37,10 @@ class Post (models.Model):
 
 class PostComment(models.Model):
 
-    created_at = models.DateTimeField(auto_now_add=True, editable=False)
+    created_at = models.DateTimeField(verbose_name='Comment created at',auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
-    comment = models.TextField()
-    author = models.ForeignKey(SurmandlUser, related_name='user_comments')
+    comment = models.TextField('Comment')
+    author = models.ForeignKey(SurmandlUser, related_name='user_comments', verbose_name='Comment author')
     post = models.ForeignKey(Post, related_name='user_post')
 
     def __unicode__(self):
