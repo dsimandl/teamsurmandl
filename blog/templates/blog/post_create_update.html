@@ -31,7 +31,7 @@
             <div class="col-sm-8">
                 <h3>New post</h3>
 
-                <form role="form" method="post" action="#">{% csrf_token %}
+                <form role="form" enctype="multipart/form-data" method="post" action="#">{% csrf_token %}
                     <div class="row">
                         <div class="form-group col-lg-4">
                             {{ form.title.label_tag }}
@@ -45,7 +45,19 @@
                         <div class="clearfix"></div>
                         <div class="form-group col-lg-4">
                             {{ form.photo.label_tag }}
+                            {% if form.instance.photo %}
+                                <img src="{{ form.instance.photo.url }}"/>
+                            {% endif %}
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group col-lg-4">
                             {{ form.photo }}
+                            <p class="help-block">Select a new photo or check to clear current photo</p>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="photo_clear"> Clear photo
+                                </label>
+                            </div>
                         </div>
                         <div class="clearfix"></div>
                         <div class="form-group col-lg-4">
