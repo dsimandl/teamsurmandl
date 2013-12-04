@@ -132,7 +132,7 @@ DJANGO_APPS = (
     # 'django.contrib.admindocs',
 )
 
-THIRD_PARTY_APPS = ('south',)
+THIRD_PARTY_APPS = ('south', 'imagekit',)
 
 LOCAL_APPS = ('profiles','blog',)
 

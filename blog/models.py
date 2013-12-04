@@ -1,5 +1,9 @@
 from django.db import models
 from django.template.defaultfilters import slugify
+
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill
+
 from profiles.admin import SurmandlUser
 
 class PostManager(models.Manager):
@@ -15,7 +19,7 @@ class Post (models.Model):
     slug = models.SlugField(max_length=255, blank=True, default='')
     content = models.TextField('Blog post content')
     published = models.BooleanField(default=True)
-    photo = models.ImageField('Photo for blog post', upload_to='blog', blank=True)
+    photo = ProcessedImageField(upload_to='blog', processors=[ResizeToFill(400, 300)], format='JPEG', options={'quality': 60}, verbose_name='Photo for blog post')
     author = models.ForeignKey(SurmandlUser, limit_choices_to={'is_staff':True},related_name='posts', verbose_name='Author for blog posts')
 
     objects = PostManager()
