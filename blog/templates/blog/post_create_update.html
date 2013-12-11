@@ -5,13 +5,15 @@
     <div class="container" xmlns="http://www.w3.org/1999/html">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">
-                    {% if object %}
-                        Update Blog Post
-                    {% else %}
-                        Create New Blog Post
-                    {% endif %}
-                </h1>
+                {% if user.is_staff %}
+                    <h1 class="page-header">
+                        {% if object %}
+                            Update Blog Post
+                        {% else %}
+                            Create New Blog Post
+                        {% endif %}
+                    </h1>
+                {% endif %}
                 <ol class="breadcrumb">
                     <li>
                         <a href="{% url "Home" %}">Home</a>
@@ -19,8 +21,10 @@
                     <li>
                         <a href="{% url "blog:list" %}">Blog Home</a>
                     </li>
-                    {% if object %}
+                    {% if object and user.is_staff %}
                         <li class="active">Update post</li>
+                    {% elif object %}
+                        <li class="active">Blog post</li>
                     {% else %}
                         <li class="active">Create post</li>
                     {% endif %}
@@ -28,64 +32,101 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-8">
-                <h3>New post</h3>
-
-                <form role="form" enctype="multipart/form-data" method="post" action="#">{% csrf_token %}
-                    <div class="row">
-                        <div class="form-group col-lg-4">
-                            {{ form.title.label_tag }}
-                            {{ form.title }}
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="form-group col-lg-4">
-                            {{ form.published.label_tag }}:
-                            {{ form.published }}
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="form-group col-lg-4">
-                            {{ form.photo.label_tag }}
-                            {% if form.instance.photo %}
-                                <img src="{{ form.instance.photo.url }}"/>
-                            {% endif %}
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="form-group col-lg-4">
-                            {{ form.photo }}
-                            <p class="help-block">Select a new photo or check to clear current photo</p>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" id="photo_clear"> Clear photo
-                                </label>
+            {% if user.is_staff %}
+                <div class="col-sm-8">
+                    {% if object %}
+                        <h3>Update post</h3>
+                    {% else %}
+                        <h3>New post</h3>
+                    {% endif %}
+                    <form role="form" enctype="multipart/form-data" method="post" action="#">{% csrf_token %}
+                        <div class="row">
+                            <div class="form-group col-lg-4">
+                                {{ form.title.label_tag }}
+                                {{ form.title }}
                             </div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="form-group col-lg-4">
-                            {{ form.author.label_tag }}
-                            {{ form.author }}
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="form-group col-lg-12">
-                            {{ form.content.label_tag }}
-                            {{ form.content }}
-                        </div>
-                        <div class="form-group col-lg-12">
+                            <div class="clearfix"></div>
+                            <div class="form-group col-lg-4">
+                                {{ form.published.label_tag }}:
+                                {{ form.published }}
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="form-group col-lg-4">
+                                {{ form.photo.label_tag }}
+                                {% if form.instance.photo %}
+                                    <img src="{{ form.instance.photo.url }}"/>
+                                {% endif %}
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="form-group col-lg-4">
+                                {{ form.photo }}
+                                <p class="help-block">Select a new photo or check to clear current photo</p>
+
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="photo_clear">
+
+                                        <div id="clear_photo">
+                                            Clear photo
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="form-group col-lg-4">
+                                {{ form.author.label_tag }}
+                                {{ form.author }}
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="form-group col-lg-12">
+                                {{ form.content.label_tag }}
+                                {{ form.content }}
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="form-group col-lg-4">
+                                <input type="hidden" name="save" value="blog_post">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                    </form>
+                </div>
+                </div>
+            {% else %}
+                <div class="col-lg-8">
+                    <hr>
+                    {% for value, text in form.author.field.choices %}
+                        {% if value == form.author.value %}
+                            <p><span class="glyphicon glyphicon-time"></span> Posted on {{ post.created_at }}
+                                by {{ text }}</p>
+                        {% endif %}
+                    {% endfor %}
+                    <hr>
+                    {% if form.instance.photo %}
+                        <img class="img-responsive" src="{{ form.instance.photo.url }}"/>
+                    {% endif %}
+                    <hr>
+                    <p>{{ form.content.value }}</p>
+                    <hr>
+                    <div class="well">
+                        <h4>Leave a comment</h4>
+
+                        <form role="form" enctype="multipart/form-data" method="post" action="#">{% csrf_token %}
+                            <div class="form-group">
+                                <textarea class="form-control" rows="3" id="blog_comment"></textarea>
+                            </div>
                             <input type="hidden" name="save" value="blog_post">
                             <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
+                        </form>
+
                     </div>
-                </form>
-                <hr/>
-                {% if user.is_staff %}
+                    <hr>
                     {% for comment in comments %}
                         <h3>{{ comment.author }}
                             <small>{{ comment.created_at }}</small>
                         </h3>
                         <p>{{ comment.comment }}</p>
                     {% endfor %}
-                {% endif %}
-            </div>
-        </div>
+                </div>
+            {% endif %}
     </div>
-
+    </div>
 {% endblock %}
