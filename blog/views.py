@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.template.defaultfilters import slugify
 
 from .models import Post, PostComment
-from .forms import PostCreateForm
+from .forms import PostCreateForm, PostReadForm
 
 class PublishedPostMixin(object):
 
@@ -33,8 +33,15 @@ class PostEditView(PublishedPostMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(PostEditView, self).get_context_data(**kwargs)
-        context['comments'] = PostComment.objects.filter(post__pk=context['post'].pk)
+        if self.request.user.is_staff == False:
+            context['comments'] = PostComment.objects.filter(post__pk=context['post'].pk)
         return context
+
+    def get_form_class(self):
+        if self.request.user.is_staff == False:
+            return PostReadForm
+        else:
+            return PostCreateForm
 
     def form_valid(self, form):
         self.object = form.save()
