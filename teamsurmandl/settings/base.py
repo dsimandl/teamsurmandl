@@ -1,6 +1,8 @@
 import os
 import dj_database_url
 
+from secert_key import *
+
 here = lambda * x: os.path.join(os.path.abspath(os.path.dirname(__file__)), *x)
 
 PROJECT_ROOT = here("..")
@@ -85,10 +87,10 @@ STATICFILES_DIRS = (root("..", "assets"),
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-# 'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-SECRET_KEY = 'l6zcv&k^u7tsw3*vtsx4w^y(g@qe2ch#^2!ms_dj5(9*gx6!!y'
+SECRET_KEY = generate_secret_key()
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
