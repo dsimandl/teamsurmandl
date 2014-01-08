@@ -19,7 +19,7 @@ class Post (models.Model):
     slug = models.SlugField(max_length=255, blank=True, default='')
     content = models.TextField('Blog post content')
     published = models.BooleanField(default=True)
-    photo = ProcessedImageField(upload_to='blog', processors=[ResizeToFill(400, 300)], format='JPEG', options={'quality': 60}, verbose_name='Photo for blog post')
+    photo = ProcessedImageField(upload_to='blog', processors=[ResizeToFill(400, 300)], format='JPEG', options={'quality': 60}, verbose_name='Photo for blog post', blank=True)
     author = models.ForeignKey(SurmandlUser, limit_choices_to={'is_staff':True},related_name='posts', verbose_name='Author for blog posts')
 
     objects = PostManager()
@@ -27,10 +27,10 @@ class Post (models.Model):
     def __unicode__(self):
         return self.title
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
-        super(Post, self).save(*args, **kwargs)
+  #  def save(self, *args, **kwargs):
+  #      if not self.slug:
+  #          self.slug = slugify(self.title)
+  #      super(Post, self).save(*args, **kwargs)
 
     @models.permalink
     def get_absolute_url(self):

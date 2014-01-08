@@ -13,6 +13,7 @@ class PostCreateForm(forms.ModelForm):
             'photo': forms.FileInput(attrs={'title': 'Test'}),
         }
 
+
 class PostReadForm(forms.ModelForm):
 
     class Meta:
@@ -24,6 +25,12 @@ class PostReadForm(forms.ModelForm):
             'content': forms.Textarea(attrs={'class': 'form-control', 'rows': '6'}),
         }
 
+
+class PostFinalForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Post
 
 
 

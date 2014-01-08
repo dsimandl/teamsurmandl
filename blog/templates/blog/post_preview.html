@@ -1,0 +1,48 @@
+{% extends "_layouts/base.html" %}
+
+{% block page_content %}
+
+    {% include "_layouts/nav.html" %}
+    <div class="container" xmlns="http://www.w3.org/1999/html">
+        <div class="row">
+            <div class="col-sm-8">
+                <h3>Preview Post</h3>
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        <strong>{{ request.session.form.title.label }}:</strong><br/>
+                        {{ object.cleaned_data.title }}
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group col-lg-4">
+                        <strong>{{ request.session.form.published.label }}:</strong><br/>
+                        {{ object.cleaned_data.published }}
+                    </div>
+                    {% if object.cleaned_data.photo %}
+                        <div class="clearfix"></div>
+                        <div class="form-group col-lg-4">
+                            <strong>{{ request.session.form.photo.label }}:</strong><br/>
+                            {{ object.cleaned_data.photo }}
+                        </div>
+                    {% endif %}
+                    <div class="clearfix"></div>
+                    <div class="form-group col-lg-4">
+                        <strong>{{ request.session.form.author.label }}:</strong><br/>
+                        {{ object.cleaned_data.author }}
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group col-lg-12">
+                        <strong>{{ request.session.form.content.label }}:</strong><br/>
+                        {{ object.cleaned_data.content }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hidden_form">
+            <form role="form" enctype="multipart/form-data" method="post" action="{% url 'blog:final_create' %}">
+                <input type="hidden" name="csrfmiddlewaretoken" value="{{ view.request.COOKIES.csrftoken }}" />
+                <input type="hidden" name="save" value="blog_post">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

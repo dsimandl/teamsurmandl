@@ -39,7 +39,8 @@
                     {% else %}
                         <h3>New post</h3>
                     {% endif %}
-                    <form role="form" enctype="multipart/form-data" method="post" action="#">{% csrf_token %}
+                    <form role="form" enctype="multipart/form-data" method="post" action="#">
+                        {% csrf_token %}
                         <div class="row">
                             <div class="form-group col-lg-4">
                                 {{ form.title.label_tag }}
@@ -65,7 +66,6 @@
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" id="photo_clear">
-
                                         <div id="clear_photo">
                                             Clear photo
                                         </div>
@@ -109,14 +109,13 @@
                     <div class="well">
                         <h4>Leave a comment</h4>
 
-                        <form role="form" enctype="multipart/form-data" method="post" action="#">{% csrf_token %}
+                      <form role="form" enctype="multipart/form-data" method="post" action="#">
                             <div class="form-group">
                                 <textarea class="form-control" rows="3" id="blog_comment"></textarea>
                             </div>
                             <input type="hidden" name="save" value="blog_post">
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
-
                     </div>
                     <hr>
                     {% for comment in comments %}
