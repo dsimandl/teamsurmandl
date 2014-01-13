@@ -69,7 +69,7 @@ class PostCreateView(FormView):
 #Slug isn't rendering correctly
 
     def form_valid(self, form):
-        form.fields['slug'] = slugify(form.fields['title'])
+    #    form.fields['slug'] = slugify(form.fields['title'])
         self.request.session['form'] = form
         return HttpResponseRedirect(self.get_success_url())
         #self.object = form.save()
@@ -111,8 +111,7 @@ class HiddenFormView(CreateView):
         data = {'title': request.session._session['form'].cleaned_data['title'],
                 'published':request.session._session['form'].cleaned_data['published'],
                 'author':request.session._session['form'].cleaned_data['author'].id,
-                'slug':request.session._session['form'].cleaned_data['slug'],
-                'content':request.session._session['form'].cleaned_data['content']
+                'content':request.session._session['form'].cleaned_data['content'],
         }
         qdict = QueryDict('')
         qdict = qdict.copy()
