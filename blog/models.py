@@ -30,6 +30,12 @@ class Post (models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
+        else:
+            if self.pk == None:
+                post = Post.objects.get(slug=self.slug)
+                self.pk = post.pk
+                self.id = post.id
+                self.created_at = post.created_at
         super(Post, self).save(*args, **kwargs)
 
     @models.permalink

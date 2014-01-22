@@ -30,7 +30,7 @@ class PostEditView(PublishedPostMixin, UpdateView):
     model = Post
     template_name = 'blog/post_create_update.html'
     form_class = PostCreateForm
-    success_url = "/blog/"
+    preview_url = '/blog/preview/'
 
     @method_decorator(csrf_protect)
     @method_decorator(login_required)
@@ -49,8 +49,18 @@ class PostEditView(PublishedPostMixin, UpdateView):
         else:
             return PostCreateForm
 
+    def get_success_url(self):
+        if self.preview_url:
+            url = force_text(self.preview_url)
+        else:
+            raise ImproperlyConfigured(
+            "No URL to redirect to. Provide a success_url.")
+        return url
+
     def form_valid(self, form):
-        self.object = form.save()
+        if not form['slug']:
+            form['slug'] = slugify(form['title'])
+        self.request.session['form'] = form
         return HttpResponseRedirect(self.get_success_url())
 
 
@@ -66,13 +76,9 @@ class PostCreateView(FormView):
     def dispatch(self, request, *args, **kwargs):
         return super(PostCreateView, self).dispatch(request, *args, **kwargs)
 
-#Slug isn't rendering correctly
-
     def form_valid(self, form):
-    #    form.fields['slug'] = slugify(form.fields['title'])
         self.request.session['form'] = form
         return HttpResponseRedirect(self.get_success_url())
-        #self.object = form.save()
 
     def get_success_url(self):
         if self.preview_url:
@@ -108,16 +114,20 @@ class HiddenFormView(CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
     def post(self, request, *args, **kwargs):
+        slug = ""
+        if request.session._session['form'].cleaned_data['slug']:
+            slug = request.session._session['form'].cleaned_data['slug']
         data = {'title': request.session._session['form'].cleaned_data['title'],
                 'published':request.session._session['form'].cleaned_data['published'],
                 'author':request.session._session['form'].cleaned_data['author'].id,
                 'content':request.session._session['form'].cleaned_data['content'],
+                'slug': slug
         }
         qdict = QueryDict('')
         qdict = qdict.copy()
         qdict.update(data)
         form = PostFinalForm(data, MultiValueDict({'photo': [request.session._session['form'].cleaned_data['photo']]}))
-        request.session.flush()
+        #request.session.flush()
         if form.is_valid():
             return self.form_valid(form)
         else:

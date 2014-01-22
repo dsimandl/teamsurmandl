@@ -42,6 +42,16 @@
                     <form role="form" enctype="multipart/form-data" method="post" action="#">
                         {% csrf_token %}
                         <div class="row">
+                            {% if object %}
+                                <div class="hidden">
+                                {{ form.pk }}
+                                </div>
+                            {% endif %}
+                            {% if form.slug.value %}
+                                <div class="hidden">
+                                    {{ form.slug }}
+                                </div>
+                            {% endif %}
                             <div class="form-group col-lg-4">
                                 {{ form.title.label_tag }}
                                 {{ form.title }}
