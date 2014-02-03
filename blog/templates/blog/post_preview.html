@@ -24,6 +24,13 @@
                             {{ object.cleaned_data.photo }}
                         </div>
                     {% endif %}
+                    {% if object.cleaned_data.clearPhoto %}
+                        <div class="clearfix"></div>
+                        <div class="form-group col-lg-4">
+                            <strong>{{ request.session.form.clearPhoto.label }}</strong><br />
+                            {{ object.cleaned_data.clearPhoto }}
+                        </div>
+                    {% endif %}
                     <div class="clearfix"></div>
                     <div class="form-group col-lg-4">
                         <strong>{{ request.session.form.author.label }}:</strong><br/>

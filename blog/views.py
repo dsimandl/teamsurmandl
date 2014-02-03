@@ -126,7 +126,10 @@ class HiddenFormView(CreateView):
         qdict = QueryDict('')
         qdict = qdict.copy()
         qdict.update(data)
-        form = PostFinalForm(data, MultiValueDict({'photo': [request.session._session['form'].cleaned_data['photo']]}))
+        if request.session._session['form'].cleaned_data['clearPhoto']:
+            form = PostFinalForm(data)
+        else:
+            form = PostFinalForm(data, MultiValueDict({'photo': [request.session._session['form'].cleaned_data['photo']]}))
         #request.session.flush()
         if form.is_valid():
             return self.form_valid(form)
