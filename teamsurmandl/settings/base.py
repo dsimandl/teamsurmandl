@@ -107,6 +107,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 )
 
 
@@ -192,6 +193,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 'django.core.context_processors.media',
 'django.core.context_processors.static',
 'django.core.context_processors.tz',
-'django.contrib.messages.context_processors.messages',
 'django.core.context_processors.request',
+'django.contrib.messages.context_processors.messages',
 )
