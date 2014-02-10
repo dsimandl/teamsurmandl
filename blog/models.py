@@ -3,6 +3,7 @@ from django.template.defaultfilters import slugify
 
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
+from taggit.managers import TaggableManager
 
 from profiles.admin import SurmandlUser
 
@@ -21,6 +22,8 @@ class Post (models.Model):
     published = models.BooleanField(default=True)
     photo = ProcessedImageField(upload_to='blog', processors=[ResizeToFill(400, 300)], format='JPEG', options={'quality': 60}, verbose_name='Photo for blog post', blank=True)
     author = models.ForeignKey(SurmandlUser, limit_choices_to={'is_staff':True},related_name='posts', verbose_name='Author for blog posts')
+
+    tags = TaggableManager()
 
     objects = PostManager()
 
@@ -44,6 +47,9 @@ class Post (models.Model):
 
     class Meta:
         ordering = ['created_at']
+
+
+
 
 class PostComment(models.Model):
 
