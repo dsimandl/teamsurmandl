@@ -10,14 +10,13 @@ The README will get better with time.
 TODO
 ========
 
-1.  django-taggit to tag blog posts
-2.  Front end validation for blog posts
-3.  Avatars for users
-4.  Paganation
-5.  Better content editor for blog posts
-6.  Real time updates for blog posts
-7.  404 Page
-8.  Tests!
-9.  Try django-waffle for app display options
+1.  Front end validation for blog posts
+2.  Avatars for users
+3.  Better content editor for blog posts
+4.  Real time updates for blog posts
+5.  404 Page
+6.  Tests!
+7.  Take a look at django-cms....
+8.  Try django-waffle for app display options
 
 

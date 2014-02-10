@@ -11,6 +11,8 @@ from django.core.exceptions import ImproperlyConfigured
 from django.http import QueryDict
 from django.utils.datastructures import MultiValueDict
 
+from taggit.models import Tag
+
 from .models import Post, PostComment
 from .forms import PostCreateForm, PostReadForm, PostFinalForm
 
@@ -20,11 +22,27 @@ class PublishedPostMixin(object):
         queryset = super(PublishedPostMixin, self).get_queryset()
         return queryset.filter(published=True)
 
+class TagMixin(object):
 
-class PostListView(PublishedPostMixin, ListView):
+    def get_context_data(self, **kwargs):
+        context = super(TagMixin, self).get_context_data(**kwargs)
+        context['tags'] = Tag.objects.all()
+        return context
 
+class PostListView(PublishedPostMixin,TagMixin, ListView):
+
+    template_name = 'blog/post_list.html'
     model = Post
     paginate_by = 5
+
+class PostTagIndexView(TagMixin, ListView):
+
+    template_name = 'blog/post_list.html'
+    model = Post
+    paginate_by = 5
+
+    def get_queryset(self):
+        return Post.objects.filter(tags__slug=self.kwargs.get('slug'), published=True)
 
 class PostEditView(PublishedPostMixin, UpdateView):
 

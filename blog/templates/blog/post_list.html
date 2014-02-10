@@ -59,9 +59,17 @@
                             <a href="{% url "blog:create_post" %}">Create New Post</a>
                         </p>
                     </div>
-
                 </div>
             {% endif %}
+            <div class="col-lg-4">
+                <div class="well">
+                    {% for tag in tags %}
+                        <a class="label label-default" href="{% url 'blog:tagged' tag.slug %}">{{ tag.name }}</a>
+                    {% empty %}
+                        <h4>No Tags</h4>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
         {% if is_paginated %}
             <div class="row">
