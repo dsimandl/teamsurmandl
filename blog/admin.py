@@ -5,7 +5,7 @@ from blog.models import Post, PostComment
 class PostAdmin(admin.ModelAdmin):
 
     date_hierarchy = 'created_at'
-    fields = ('published', 'title', 'slug', 'content', 'author', 'photo')
+    fields = ('published', 'title', 'slug', 'content', 'author', 'photo', 'tags')
     list_display = ['published', 'title', 'updated_at']
     list_display_links = ['title']
     list_editable = ['published']

@@ -24,6 +24,7 @@ class PublishedPostMixin(object):
 class PostListView(PublishedPostMixin, ListView):
 
     model = Post
+    paginate_by = 5
 
 class PostEditView(PublishedPostMixin, UpdateView):
 
