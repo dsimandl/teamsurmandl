@@ -135,7 +135,7 @@ DJANGO_APPS = (
     # 'django.contrib.admindocs',
 )
 
-THIRD_PARTY_APPS = ('south', 'imagekit', 'debug_toolbar', 'memcache_status', 'taggit',)
+THIRD_PARTY_APPS = ('south', 'imagekit', 'debug_toolbar', 'memcache_status', 'taggit', 'django_extensions',)
 
 LOCAL_APPS = ('profiles','blog',)
 
