@@ -16,7 +16,10 @@ TODO
 4.  Real time updates for blog posts
 5.  404 Page
 6.  Tests!
-7.  Take a look at django-cms....
-8.  Try django-waffle for app display options
+7.  Enter images into media folder based on date (GoDjango)
+8.  Ajax for some posts?
+9.  Take a look at django-cms....
+10. Create heroku deployment scripts with fabric (GoDjango and http://www.realpython.com/blog/python/migrating-your-django-project-to-heroku/#.UvumK_be6gl)
+11.  Try django-waffle for app display options
 
 
