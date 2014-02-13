@@ -3,6 +3,9 @@ from  django.db import models
 from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser, PermissionsMixin)
 
 class SurmandlUserManager(BaseUserManager):
+    """
+    Model manager for our surmandl site user
+    """
 
     def create_user(self, email, first_name, last_name, relation, password=None):
         if not email:
@@ -34,6 +37,9 @@ USERNAME_FIELD = "email"
 REQUIRED_FIELDS = ["first_name", "last_name", "relation",]
 
 class SurmandlUser(AbstractBaseUser, PermissionsMixin):
+    """
+    Model for our Surmandl user  We are taking this approach because we wanted control over the user fields
+    """
 
     email = models.EmailField(
         verbose_name="email address",

@@ -8,11 +8,19 @@ from taggit.managers import TaggableManager
 from profiles.admin import SurmandlUser
 
 class PostManager(models.Manager):
+    """
+    Simple model manager to make sure we only query published blog posts
+    """
 
     def live(self):
         return self.model.objects.filter(published=True)
 
 class Post (models.Model):
+    """
+    The post model.  We have a tag object to use for post tagging.
+    We override the save method to slugify the title for our slug.  We also make sure the primary key of the post isn't null because of the current preview functionality
+    We also order by the created_by field
+    """
 
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
@@ -52,6 +60,9 @@ class Post (models.Model):
 
 
 class PostComment(models.Model):
+    """
+    Fairly standard model for the post comments, linked to each post
+    """
 
     created_at = models.DateTimeField(verbose_name='Comment created at',auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)

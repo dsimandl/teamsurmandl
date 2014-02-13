@@ -16,6 +16,7 @@ from .forms import SurmandlAuthForm
 logger = logging.getLogger(__name__)
 
 class LoginView(FormView):
+    """View to handle our login process."""
     form_class = SurmandlAuthForm
     redirect_field_name = REDIRECT_FIELD_NAME
     template_name = "login.html"
@@ -43,6 +44,7 @@ class LoginView(FormView):
         return redirect_to
 
 class HomePageView(TemplateView):
+    """Basic view for the homepage"""
 
     template_name = "home.html"
 
@@ -53,6 +55,7 @@ class HomePageView(TemplateView):
 
 
 class LogOutView(RedirectView):
+    """And here is the logout view, taking the user back to the login page. """
 
     url = settings.LOGIN_URL
     permanent = False

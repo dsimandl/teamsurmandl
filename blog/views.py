@@ -1,4 +1,4 @@
-#Gotta do Pagination
+
 
 from django.views.generic import UpdateView, ListView, FormView, DetailView, CreateView
 from django.utils.decorators import method_decorator
@@ -17,12 +17,18 @@ from .models import Post, PostComment
 from .forms import PostCreateForm, PostReadForm, PostFinalForm
 
 class PublishedPostMixin(object):
+    """
+    This sets the queryset to return only published posts
+    """
 
     def get_queryset(self):
         queryset = super(PublishedPostMixin, self).get_queryset()
         return queryset.filter(published=True)
 
 class TagMixin(object):
+    """
+    Mixin for all the posts we want tagged
+    """
 
     def get_context_data(self, **kwargs):
         context = super(TagMixin, self).get_context_data(**kwargs)
@@ -30,12 +36,18 @@ class TagMixin(object):
         return context
 
 class PostListView(PublishedPostMixin,TagMixin, ListView):
+    """
+    Simple view to list all of our blog posts
+    """
 
     template_name = 'blog/post_list.html'
     model = Post
     paginate_by = 5
 
 class PostTagIndexView(TagMixin, ListView):
+    """
+    View to list our blog posts by tags
+    """
 
     template_name = 'blog/post_list.html'
     model = Post
@@ -45,6 +57,10 @@ class PostTagIndexView(TagMixin, ListView):
         return Post.objects.filter(tags__slug=self.kwargs.get('slug'), published=True)
 
 class PostEditView(PublishedPostMixin, UpdateView):
+    """
+    Edit view for our blog posts.  If the user is not an admin we direct them to the read form, otherwise they are directed to the edit form
+    When the form is submitted we direct to the preview form
+    """
 
     model = Post
     template_name = 'blog/post_create_update.html'
@@ -84,6 +100,9 @@ class PostEditView(PublishedPostMixin, UpdateView):
 
 
 class PostCreateView(FormView):
+    """
+    View for our post create.  We store the form into the session if its valid
+    """
 
     form_class = PostCreateForm
     template_name = 'blog/post_create_update.html'
@@ -110,6 +129,9 @@ class PostCreateView(FormView):
 #Think about how we can do this with cookies or html localstorage
 
 class PostPreviewView(DetailView):
+    """
+    View for our preview form.
+    """
 
     template_name = 'blog/post_preview.html'
 
@@ -123,6 +145,9 @@ class PostPreviewView(DetailView):
         return self.render_to_response(context)
 
 class HiddenFormView(CreateView):
+    """
+    View that handles the post from the preview form and submits it.
+    """
 
     success_url = "/blog/"
 

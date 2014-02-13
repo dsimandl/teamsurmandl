@@ -7,6 +7,8 @@ from .models import Post
 from .models import SurmandlUser
 
 class BlogBasicTest(TestCase):
+    """Basic test class to test the fields, the saving of the slug, a custom slug, and the model manager
+    """
 
 
     def setUp(self):

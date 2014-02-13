@@ -1,3 +1,4 @@
+"""blog specific url routing file """
 from django.conf.urls import patterns, url
 from django.views.decorators.http import require_POST
 

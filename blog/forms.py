@@ -3,6 +3,9 @@ from django import forms
 from .models import Post
 
 class PostCreateForm(forms.ModelForm):
+    """
+    Post Creation form with customized inputs and a clear photo checkbox
+    """
 
     clearPhoto = forms.BooleanField(required=False, label="Clear Photo")
 
@@ -17,6 +20,9 @@ class PostCreateForm(forms.ModelForm):
 
 
 class PostReadForm(forms.ModelForm):
+    """
+    Form to read a post with some customization for the content section
+    """
 
     class Meta:
 
@@ -29,6 +35,10 @@ class PostReadForm(forms.ModelForm):
 
 
 class PostFinalForm(forms.ModelForm):
+
+    """
+    Simple form for the post preview
+    """
 
     class Meta:
 

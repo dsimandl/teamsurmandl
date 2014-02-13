@@ -7,6 +7,7 @@ from crispy_forms.layout import Submit, Layout, Field, HTML, Div
 from crispy_forms.bootstrap import FormActions
 
 class SurmandlAuthForm(AuthenticationForm):
+    """Form for our site login page.  We are using crispy-forms here."""
 
     username = forms.EmailField()
     password = forms.PasswordInput()

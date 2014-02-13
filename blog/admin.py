@@ -3,6 +3,9 @@ from blog.models import Post, PostComment
 
 
 class PostAdmin(admin.ModelAdmin):
+    """
+    Model admin for the post model
+    """
 
     date_hierarchy = 'created_at'
     fields = ('published', 'title', 'slug', 'content', 'author', 'photo', 'tags')
@@ -17,6 +20,9 @@ admin.site.register(Post, PostAdmin)
 
 
 class PostCommentAdmin(admin.ModelAdmin):
+    """
+    Model admin for the post comment model
+    """
 
     date_hierarchy = 'created_at'
     fields = ('post', 'author', 'comment')
