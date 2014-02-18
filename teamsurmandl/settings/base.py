@@ -130,12 +130,14 @@ DJANGO_APPS = (
     'django.contrib.staticfiles',
     'crispy_forms',
     # Uncomment the next line to enable the admin:
+    'django_admin_bootstrapped.bootstrap3',
+    'django_admin_bootstrapped',
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
 
-THIRD_PARTY_APPS = ('south', 'imagekit', 'debug_toolbar', 'memcache_status', 'taggit', 'django_extensions',)
+THIRD_PARTY_APPS = ('south', 'imagekit', 'debug_toolbar', 'memcache_status', 'taggit', 'django_extensions', 'django_summernote',)
 
 LOCAL_APPS = ('profiles','blog',)
 

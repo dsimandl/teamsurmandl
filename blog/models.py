@@ -31,7 +31,7 @@ class Post (models.Model):
     photo = ProcessedImageField(upload_to='blog', processors=[ResizeToFill(400, 300)], format='JPEG', options={'quality': 60}, verbose_name='Photo for blog post', blank=True)
     author = models.ForeignKey(SurmandlUser, limit_choices_to={'is_staff':True},related_name='posts', verbose_name='Author for blog posts')
 
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
 
     objects = PostManager()
 
@@ -41,12 +41,6 @@ class Post (models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
-        else:
-            if self.pk == None:
-                post = Post.objects.get(slug=self.slug)
-                self.pk = post.pk
-                self.id = post.id
-                self.created_at = post.created_at
         super(Post, self).save(*args, **kwargs)
 
     @models.permalink
