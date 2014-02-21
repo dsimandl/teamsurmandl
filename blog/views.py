@@ -1,16 +1,17 @@
 import json
 
-from django.views.generic import UpdateView, ListView
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import FormMixin, ProcessFormView
 from django.utils.decorators import method_decorator
+from django.core.serializers.json import DjangoJSONEncoder
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
-from django.http import HttpResponseRedirect, HttpResponse
-from django.template.defaultfilters import slugify
+from django.http import HttpResponse
 
 from taggit.models import Tag
 
 from .models import Post, PostComment
-from .forms import PostReadForm
+from .forms import PostCommentForm
 
 class PublishedPostMixin(object):
     """
@@ -34,7 +35,7 @@ class TagMixin(object):
 
 class AjaxableResponseMixin(object):
     def render_to_json_response(self, context, **response_kwargs):
-        data = json.dumps(context)
+        data = json.dumps(context, cls=DjangoJSONEncoder)
         response_kwargs['content_type'] = 'application/json'
         return HttpResponse(data, **response_kwargs)
 
@@ -47,7 +48,9 @@ class AjaxableResponseMixin(object):
 
     def form_valid(self, form):
         if self.request.is_ajax():
-            return self.render_to_json_response(self.request.POST)
+            self.object = form.save()
+            data = {'comment': self.object.comment, 'first_name': self.object.author.first_name, 'last_name': self.object.author.last_name }
+            return self.render_to_json_response(data)
         else:
             return response
 
@@ -73,7 +76,7 @@ class PostTagIndexView(TagMixin, ListView):
     def get_queryset(self):
         return Post.objects.filter(tags__slug=self.kwargs.get('slug'), published=True)
 
-class PostEditView(PublishedPostMixin, AjaxableResponseMixin, UpdateView):
+class PostDetailView(PublishedPostMixin, AjaxableResponseMixin, FormMixin, DetailView, ProcessFormView):
     """
     Edit view for our blog posts.  If the user is not an admin we direct them to the read form, otherwise they are directed to the edit form
     When the form is submitted we direct to the preview form
@@ -81,20 +84,20 @@ class PostEditView(PublishedPostMixin, AjaxableResponseMixin, UpdateView):
 
     model = Post
     template_name = 'blog/post_create_update.html'
-    form_class = PostReadForm
+    form_class = PostCommentForm
+    initial = {}
     success_url = '/blog/'
 
     @method_decorator(csrf_protect)
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
-        return super(PostEditView, self).dispatch(request, *args, **kwargs)
+        return super(PostDetailView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(PostEditView, self).get_context_data(**kwargs)
-        context['comments'] = PostComment.objects.filter(post__pk=context['post'].pk)
+        context = super(PostDetailView, self).get_context_data(**kwargs)
+        context.update({'comments':(PostComment.objects.filter(post__pk=context['post'].pk))})
+        self.initial = {'post': context['post'].pk, 'author': context['post'].author.pk}
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        context.update({'form': form})
         return context
-
-  #  def form_valid(self, form):
-   #     if not form['slug']:
-   #         form['slug'] = slugify(form['title'])
-   #     return HttpResponseRedirect(self.get_success_url())

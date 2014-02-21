@@ -8,10 +8,18 @@ $(document).ready(function() {
             dataType: "json",
             data: $("#comment form").serialize(),
             success: function(data) {
-                alert(data.message);
+                appendCommentList(data);
             }
         })
-    })
+    });
+
+    function appendCommentList(obj){
+        event.preventDefault();
+        var new_element = $('<h3 class="list-group-item-heading">' + obj.first_name + " " + obj.last_name + '</h3>' +
+                '<p class="list-group-item-text">' + obj.comment + '</p>');
+        $(".list-group").append(new_element);
+
+    }
 
     // CSRF code
     function getCookie(name) {

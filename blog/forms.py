@@ -1,19 +1,20 @@
 from django import forms
 
-from .models import Post
+from .models import PostComment
 
-class PostReadForm(forms.ModelForm):
+class PostCommentForm(forms.ModelForm):
     """
     Form to read a post with some customization for the content section
     """
 
     class Meta:
 
-        model = Post
-        exclude = ['title', 'published']
+        model = PostComment
 
         widgets = {
-            'content': forms.Textarea(attrs={'class': 'form-control', 'rows': '6'}),
+            'post': forms.HiddenInput(),
+            'author': forms.HiddenInput(),
+            'comment': forms.Textarea(attrs={'class': 'form-control', 'rows': '6'}),
         }
 
 

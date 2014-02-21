@@ -1,6 +1,13 @@
 {% extends "_layouts/base.html" %}
 
 {% block other_head_items %}
+    <link href="{{ STATIC_URL }}css/carousel.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/home.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="{{ STATIC_URL }}js/html5shiv.js"></script>
+      <script src="{{ STATIC_URL }}js/respond.min.js"></script>
+    <![endif]-->
     <script src="{{ STATIC_URL }}js/commentwonder.js"></script>
     {{ form.media }}
 {% endblock %}
@@ -24,35 +31,33 @@
         <div class="row">
             <div class="col-lg-8">
                 <hr>
-                {% for value, text in form.author.field.choices %}
-                    {% if value == form.author.value %}
-                        <p><span class="glyphicon glyphicon-time"></span> Posted on {{ post.created_at }}
-                            by {{ text }}</p>
-                    {% endif %}
-                {% endfor %}
+                <p><span class="glyphicon glyphicon-time"></span> Posted on {{ post.created_at }}
+                            by {{ post.author }}</p>
                 <hr>
-                <p>{{ form.content.value|safe }}</p>
+                <p>{{ post.content|safe }}</p>
                 <hr>
                 <div class="well">
                     <h4>Leave a comment</h4>
-
-                    <div id="comment">
-                    <form role="form" enctype="multipart/form-data" method="post" action="{% url 'blog:edit' slug=form.slug.value%}">
+                <div id="comment">
+                    <form role="form" enctype="multipart/form-data" method="post" action="#">
                         <div class="form-group">
-                            <textarea class="form-control" rows="3" id="blog_comment"></textarea>
+                            {{ form.comment }}
+                            {{ form.post }}
+                            {{ form.author }}
                         </div>
-                        <input type="hidden" name="save" value="blog_post">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
             </div>
             <hr>
+            <div class="list-group">
             {% for comment in comments %}
-                <h3>{{ comment.author }}
+                <h3 class="list-group-item-heading">{{ comment.author }}
                     <small>{{ comment.created_at }}</small>
                 </h3>
-                <p>{{ comment.comment }}</p>
+                <p class="list-group-item-text">{{ comment.comment }}</p>
             {% endfor %}
+           </div>
         </div>
     </div>
     </div>

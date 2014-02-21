@@ -1,5 +1,15 @@
 {% extends "_layouts/base.html" %}
 
+{% block other_head_items %}
+    <link href="{{ STATIC_URL }}css/carousel.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/home.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="{{ STATIC_URL }}js/html5shiv.js"></script>
+      <script src="{{ STATIC_URL }}js/respond.min.js"></script>
+    <![endif]-->
+{% endblock %}
+
 {% block page_title %}Blog Posts | {% endblock %}
 
 
@@ -63,7 +73,7 @@
             {% endif %}
             <div class="col-lg-4">
                 <div class="well">
-                    {% for tag in tags %}
+                    {% for tag in    tags %}
                         <a class="label label-default" href="{% url 'blog:tagged' tag.slug %}">{{ tag.name }}</a>
                     {% empty %}
                         <h4>No Tags</h4>

@@ -7,16 +7,16 @@ h1 {
     font-family: 'Lobster', Helvetica, Arial, sans-serif;
 }
 
-.navbar, p, h2, #blog_title, .help-block, #clear_photo {
+.navbar, p, h2, h3, h4, h5, #blog_title, .help-block, #clear_photo, li, .btn, .label {
     font-family: 'Cabin', Helvetica, Arial, sans-serif;
 }
 
 .navbar-fixed-top {
-    border-top: 4px solid #E6399B;
+    border-bottom: 4px solid #E6399B;
 }
 
 .carousel {
-    margin-top: -5px;
+    margin-top: -6px;
 }
 
 .carousel .item {
