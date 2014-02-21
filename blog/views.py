@@ -49,7 +49,8 @@ class AjaxableResponseMixin(object):
     def form_valid(self, form):
         if self.request.is_ajax():
             self.object = form.save()
-            data = {'comment': self.object.comment, 'first_name': self.object.author.first_name, 'last_name': self.object.author.last_name }
+            mydatetime = self.object.created_at.strftime("%b. %d, %Y, %I:%M %p")
+            data = {'comment': self.object.comment, 'first_name': self.object.author.first_name, 'last_name': self.object.author.last_name, 'created_at': mydatetime }
             return self.render_to_json_response(data)
         else:
             return response
@@ -96,7 +97,7 @@ class PostDetailView(PublishedPostMixin, AjaxableResponseMixin, FormMixin, Detai
     def get_context_data(self, **kwargs):
         context = super(PostDetailView, self).get_context_data(**kwargs)
         context.update({'comments':(PostComment.objects.filter(post__pk=context['post'].pk))})
-        self.initial = {'post': context['post'].pk, 'author': context['post'].author.pk}
+        self.initial = {'post': context['post'].pk, 'author': self.request.user.pk}
         form_class = self.get_form_class()
         form = self.get_form(form_class)
         context.update({'form': form})
