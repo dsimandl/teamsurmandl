@@ -13,6 +13,17 @@ $(document).ready(function() {
         })
     });
 
+    $("a#delete_link").click(function(event){
+        event.preventDefault();
+        $.ajax({
+            type: "GET",
+            url: $(this).attr("href"),
+            success: function(data){
+                $("#" + data.comment_id).remove();
+            }
+        });
+    });
+
     function appendCommentList(obj){
         event.preventDefault();
         var new_element = $('<h3 class="list-group-item-heading">' + obj.first_name + " " + obj.last_name + " " +

@@ -6,7 +6,7 @@ from django.utils.decorators import method_decorator
 from django.core.serializers.json import DjangoJSONEncoder
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 
 from taggit.models import Tag
 
@@ -102,3 +102,11 @@ class PostDetailView(PublishedPostMixin, AjaxableResponseMixin, FormMixin, Detai
         form = self.get_form(form_class)
         context.update({'form': form})
         return context
+
+
+def delete_comment(request, id):
+        #Try/except here
+        u = PostComment.objects.get(pk=id).delete()
+        data = {'comment_id': id}
+        return HttpResponse(json.dumps(data), content_type='application/json')
+
