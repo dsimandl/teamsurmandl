@@ -97,6 +97,7 @@ class PostDetailView(PublishedPostMixin, AjaxableResponseMixin, FormMixin, Detai
     def get_context_data(self, **kwargs):
         context = super(PostDetailView, self).get_context_data(**kwargs)
         context.update({'comments':(PostComment.objects.filter(post__pk=context['post'].pk))})
+
         self.initial = {'post': context['post'].pk, 'author': self.request.user.pk}
         form_class = self.get_form_class()
         form = self.get_form(form_class)
@@ -109,4 +110,5 @@ def delete_comment(request, id):
         u = PostComment.objects.get(pk=id).delete()
         data = {'comment_id': id}
         return HttpResponse(json.dumps(data), content_type='application/json')
+
 
