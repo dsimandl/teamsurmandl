@@ -37,9 +37,6 @@
                 <p class="navbar-text pull-right">Signed in as <a href="{% url 'profile:user'%}">{{ user.first_name }} {{ user.last_name }}</a> </p>
             </li>
             <li>
-                <a href="{% url 'avatar_change' %}">Change your avatar</a>
-            </li>
-            <li>
                 <a href="{% url 'logout' %}">Logout</a>
             </li>
         </ul>

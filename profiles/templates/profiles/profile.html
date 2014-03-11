@@ -3,19 +3,19 @@
 {% block other_head_items %}
     <link href="{{ STATIC_URL }}css/carousel.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/home.css" rel="stylesheet">
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="{{ STATIC_URL }}js/html5shiv.js"></script>
       <script src="{{ STATIC_URL }}js/respond.min.js"></script>
     <![endif]-->
 {% endblock %}
 
-{% block page_title %}My Profile | {% endblock %}
+{% block page_title %}My Profile {% endblock %}
 
 {% block page_content %}
     {% include "_layouts/nav.html" %}
     <div class="container">
-    <div class="row">
+        <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
                     My Profile
@@ -30,27 +30,38 @@
                 </ol>
             </div>
         </div>
-    <div class="row">
+        <div class="row">
             <div class="col-lg-8">
-            <div class="well">
-                <form role="form" enctype="multipart/form-data" method="post" action="#">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="first_name">{{ form.first_name.label }}</label>
-                        {{ form.first_name }}
-                    </div>
-                    <div class="form-group">
-                        <label for="last_name">{{ form.last_name.label }}</label>
-                        {{ form.last_name }}
-                    </div>
-                    <div class="form-group">
-                        <label for="email">{{ form.email.label }}</label>
-                        {{ form.email }}
-                    </div>
-                    {{ form.relation }}
-                      <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="well">
+                    <form role="form" enctype="multipart/form-data" method="post" action="#">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="first_name">{{ form.first_name.label }}</label>
+                            {{ form.first_name }}
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name">{{ form.last_name.label }}</label>
+                            {{ form.last_name }}
+                        </div>
+                        <div class="form-group">
+                            <label for="email">{{ form.email.label }}</label>
+                            {{ form.email }}
+                        </div>
+                        {{ form.relation }}
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
+                </div>
             </div>
+            <div class="col-lg-4">
+                <div class="well">
+                    <h4>
+                        Profile picture
+                    </h4>
+
+                    <p>
+                        <a href="{% url 'avatar_change' %}">Change your avatar</a>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
