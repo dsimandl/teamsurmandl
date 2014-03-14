@@ -12,6 +12,8 @@ TODO
 2.  Display avatars for users in comment posts
 3.  Style avatar add page like avatar change page
 4.  Build out photo gallery based on this:  http://lightbird.net/dbe/photo.html
+    a. Bulk upload for images in admin
+    b. thumbnails for images in admin
 5.  Try this for file uploads: https://github.com/blueimp/jQuery-File-Upload/wiki
 6.  Clear the session but not the user....
 7.  404 Page

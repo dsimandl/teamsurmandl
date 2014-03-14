@@ -139,7 +139,7 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = ('south', 'imagekit', 'debug_toolbar', 'memcache_status', 'taggit', 'django_extensions', 'django_summernote', 'avatar')
 
-LOCAL_APPS = ('profiles','blog',)
+LOCAL_APPS = ('profiles','blog','gallery')
 
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
