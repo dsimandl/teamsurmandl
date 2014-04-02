@@ -1,5 +1,6 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     {% url 'blog:list' as blog %}
+    {% url 'gallery:album' as gallery %}
     <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
       <span class="sr-only">Toggle navigation</span>
@@ -21,9 +22,15 @@
                 <a href="{{ blog }}">Blog</a>
             </li>
             {% endifequal %}
-            <li>
-                <a href="#">Photos</a>
+            {% ifequal request.path gallery %}
+            <li class="active">
+                <a href="{{ gallery }}">Photos</a>
             </li>
+            {% else %}
+            <li>
+                <a href="{{ gallery }}">Photos</a>
+            </li>
+            {% endifequal %}
             <li>
                 <a href="#">Where are we?</a>
             </li>

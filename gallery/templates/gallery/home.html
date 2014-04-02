@@ -1,0 +1,36 @@
+{% extends "_layouts/base.html" %}
+
+{% block other_head_items %}
+    <link href="{{ STATIC_URL }}css/carousel.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/home.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="{{ STATIC_URL }}js/html5shiv.js"></script>
+      <script src="{{ STATIC_URL }}js/respond.min.js"></script>
+    <![endif]-->
+{% endblock %}
+
+{% block page_title %}Albums | {% endblock %}
+
+{% block page_content %}
+    <!-- NAV BAR -->
+    {% include "_layouts/nav.html" %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Team Surmandl Blog
+                </h1>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="{% url "Home" %}">Home</a>
+                    </li>
+                    <li class="active">
+                        Album Gallery
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+{% endblock %}
