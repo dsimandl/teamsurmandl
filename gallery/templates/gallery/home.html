@@ -32,5 +32,13 @@
                 </ol>
             </div>
         </div>
+        <div class="row">
+            {% for image in image_list %}
+                <div class="col-md-2">
+                    <label for="alumbimgthumb">{% for album in image.albums.all %}{{ album.title }}{% endfor %}</label>
+                    <img src="{{ image.image_thumb.url }}" alt="{{ image.title }}" class="img-rounded" id="alumbimgthumb">
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

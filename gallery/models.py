@@ -16,7 +16,7 @@ class Album(models.Model):
 class Image(models.Model):
     title = models.CharField(max_length=60, blank=True, null=True)
     image = ProcessedImageField(upload_to='gallery', format='JPEG', verbose_name='Image', blank=True)
-    image_thumb = ImageSpecField(source='image', processors=[ResizeToFill(80,80)], format='JPEG', options={'quality': 60})
+    image_thumb = ImageSpecField(source='image', processors=[ResizeToFill(140,140)], format='JPEG', options={'quality': 60})
     albums = models.ManyToManyField(Album, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(SurmandlUser, null=True, blank=True)
