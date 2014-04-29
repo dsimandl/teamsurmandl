@@ -49,8 +49,8 @@ class AjaxableResponseMixin(object):
     def form_valid(self, form):
         if self.request.is_ajax():
             self.object = form.save()
-            mydatetime = self.object.created_at.strftime("%b. %d, %Y, %I:%M %p")
-            data = {'comment': self.object.comment, 'first_name': self.object.author.first_name, 'last_name': self.object.author.last_name, 'created_at': mydatetime }
+            my_datetime = self.object.created_at.strftime("%b. %d, %Y, %I:%M %p")
+            data = {'comment': self.object.comment, 'first_name': self.object.author.first_name, 'last_name': self.object.author.last_name, 'created_at': my_datetime }
             return self.render_to_json_response(data)
         else:
             return response
