@@ -1,3 +1,6 @@
+{% extends "_layouts/head_items_base.html" %}
+
+{% block nav %}
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     {% url 'blog:list' as blog %}
     {% url 'gallery:album' as gallery %}
@@ -49,3 +52,5 @@
         </ul>
     </div>
 </nav>
+
+{% endblock %}

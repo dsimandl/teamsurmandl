@@ -1,6 +1,6 @@
 import json
 
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, FormView
 from django.views.generic.edit import FormMixin, ProcessFormView
 from django.utils.decorators import method_decorator
 from django.core.serializers.json import DjangoJSONEncoder
@@ -73,9 +73,26 @@ class PostTagIndexView(TagMixin, ListView):
     template_name = 'blog/post_list.html'
     model = Post
     paginate_by = 5
+    http_method_names = ['get', 'post']
 
     def get_queryset(self):
         return Post.objects.filter(tags__slug=self.kwargs.get('slug'), published=True)
+
+class PostTitleIndexView(TagMixin, ListView, ):
+    """
+    View to list our blog posts by a title search
+    """
+    template_name = 'blog/post_list.html'
+    model = Post
+    paginate_by = 5
+
+    def get_queryset(self):
+        title_search = self.request.GET['title_search']
+        if title_search == '':
+            return Post.objects.all()
+        else:
+            return Post.objects.filter(title__icontains=title_search)
+
 
 class PostDetailView(PublishedPostMixin, AjaxableResponseMixin, FormMixin, DetailView, ProcessFormView):
     """

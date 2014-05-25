@@ -1,20 +1,8 @@
-{% extends "_layouts/base.html" %}
-
-{% block other_head_items %}
-    <link href="{{ STATIC_URL }}css/carousel.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}css/home.css" rel="stylesheet">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="{{ STATIC_URL }}js/html5shiv.js"></script>
-      <script src="{{ STATIC_URL }}js/respond.min.js"></script>
-    <![endif]-->
-{% endblock %}
+{% extends "_layouts/base_head_nav.html" %}
 
 {% block page_title %}Albums | {% endblock %}
 
 {% block page_content %}
-    <!-- NAV BAR -->
-    {% include "_layouts/nav.html" %}
 
     <div class="container">
         <div class="row">
@@ -33,12 +21,16 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-lg-12">
             {% for image in image_list %}
                 <div class="col-md-2">
-                    <label for="alumbimgthumb">{% for album in image.albums.all %}{{ album.title }}{% endfor %}</label>
+                    <label for="alumbimgthumb">{% for album in image.albums.all %}
+                        <a href="{% url "gallery:images" album.id %}">{{ album.title }}</a>
+                    {% endfor %}</label>
                     <img src="{{ image.image_thumb.url }}" alt="{{ image.title }}" class="img-rounded" id="alumbimgthumb">
                 </div>
             {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}

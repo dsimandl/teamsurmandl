@@ -7,7 +7,7 @@ h1 {
     font-family: 'Lobster', Helvetica, Arial, sans-serif;
 }
 
-.navbar, p, h2, h3, h4, h5, #blog_title, .help-block, #clear_photo, li, .btn, .label {
+.navbar, p, h2, h3, h4, h5, #blog_title, .help-block, #clear_photo, li, .btn, label {
     font-family: 'Cabin', Helvetica, Arial, sans-serif;
 }
 

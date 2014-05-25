@@ -1,19 +1,10 @@
-{% extends "_layouts/base.html" %}
+{% extends "_layouts/base_head_nav.html" %}
 
-{% block other_head_items %}
-  <link href="{{ STATIC_URL }}css/carousel.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}css/home.css" rel="stylesheet">
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="{{ STATIC_URL }}js/html5shiv.js"></script>
-      <script src="{{ STATIC_URL }}js/respond.min.js"></script>
-    <![endif]-->
-{% endblock %}
+
 {% block page_content %}
 
 
     <!-- NAV BAR -->
-    {% include "_layouts/nav.html" %}
 
     <!-- Carousel - Only one picture though and modified. :)
     ================================================== -->
