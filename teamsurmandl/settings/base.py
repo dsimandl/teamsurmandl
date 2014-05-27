@@ -197,3 +197,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 'django.core.context_processors.request',
 'django.contrib.messages.context_processors.messages',
 )
+
+SOUTH_MIGRATION_MODULES = {
+    'taggit': 'taggit.south_migrations',
+}
