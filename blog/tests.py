@@ -2,7 +2,9 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
 
-from .models import Post
+from model_mommy import mommy
+
+from .models import Post, PostComment
 
 from .models import SurmandlUser
 
@@ -13,56 +15,39 @@ class BlogBasicTest(TestCase):
 
     def setUp(self):
 
-        self.user = SurmandlUser()
-        self.user.id = '676'
-        self.user.email = "test@test.com"
-        self.user.first_name = "test"
-        self.user.last_name = "user"
-        self.user.relation = "self"
+        self.new_user = mommy.make(SurmandlUser)
+        self.new_post = mommy.make(Post)
+        self.new_comment = mommy.make(PostComment)
 
-        self.post = Post()
-        self.post.title = "Make more Tests"
-        self.post.content = "This is a test post"
-        self.post.author = self.user
-        self.post.author_id = self.user.id
-        self.post.save()
+    def test_user_create(self):
+
+        self.assertTrue(isinstance(self.new_user, SurmandlUser))
+
+    def test_post_create(self):
+
+        self.assertTrue(isinstance(self.new_post, Post))
+        self.assertEqual(self.new_post.__unicode__(), self.new_post.title)
+        self.assertEqual(reverse('blog:edit', kwargs={'slug': self.new_post.slug}), self.new_post.get_absolute_url())
 
 
-    def test_fields(self):
+    def test_post_comment_create(self):
+        self.assertTrue(isinstance(self.new_comment, PostComment))
+        self.assertEqual(self.new_comment.__unicode__(), self.new_comment.comment)
+  #  def test_slug_on_save(self):
 
-        post = Post()
-        post.title = "This is the first test!"
-        post.content = "This is a test post.  More of these will be made"
-        post.author = self.user
-        post.author_id = self.user.id
-        post.save()
-
-        record = Post.objects.get(pk=post.id)
-        self.assertEqual(record, post)
-
-    def test_slug_on_save(self):
-
-        self.assertEqual(self.post.slug, 'make-more-tests')
-
-    def test_get_absolute_url(self):
-
-        #The reverse gets us our application instance name (aka, the namespace which in this case is blog)
-        self.assertEqual(
-            self.post.get_absolute_url(),
-            reverse('blog:detail', kwargs={'slug': self.post.slug})
-        )
+  #      self.assertEqual(self.post.slug, 'make-more-tests')
 
     def test_model_manager(self):
-        live_post = self.post
-        draft_post = self.post.published=False
+        live_post = self.new_post
+        draft_post = self.new_post.published=False
         self.assertIn(live_post, Post.objects.live())
         self.assertNotIn(draft_post, Post.objects.live())
 
-    def test_custom_slug(self):
-        post = Post.objects.create(
-            title='A Post with a Custom Slug',
-            slug='fizzbuzz',
-            author=self.user
-        )
-        self.assertNotEqual(post.slug, slugify(post.title))
-        self.assertEqual(post.slug, 'fizzbuzz')
+#    def test_custom_slug(self):
+#        post = Post.objects.create(
+#            title='A Post with a Custom Slug',
+#            slug='fizzbuzz',
+#            author=self.user
+#        )
+#        self.assertNotEqual(post.slug, slugify(post.title))
+#        self.assertEqual(post.slug, 'fizzbuzz')
