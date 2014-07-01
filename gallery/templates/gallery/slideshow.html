@@ -42,9 +42,12 @@
                 <div class="slider-wrapper theme-default">
                     <div class="ribbon"></div>
                     <div id="slider" class="nivoSlider">
-                        {% for image in image_list %}
-                            <img src="{{ image.image.url }}" alt="{{ image.title }}" title="{{ image.title }}">
-                        {% endfor %}
+                            <img src="{{ object_list.image.url }}" alt="{{ object_list.image.title }}" title="{{ object_list.image.title }}">
+                            {% for image in album_images %}
+                                {% ifnotequal object_list.image.title image.title %}
+                                    <img src="{{ image.image.url }}" alt="{{ image.title }}" title="{{ image.title }}">
+                                {% endifnotequal %}
+                            {% endfor %}
                     </div>
                 </div>
             </div>

@@ -6,8 +6,6 @@ from model_mommy import mommy
 
 from .models import Post, PostComment
 
-from .models import SurmandlUser
-
 class BlogBasicTest(TestCase):
     """Basic test class to test the fields, the saving of the slug, a custom slug, and the model manager
     """
@@ -15,13 +13,8 @@ class BlogBasicTest(TestCase):
 
     def setUp(self):
 
-        self.new_user = mommy.make(SurmandlUser)
         self.new_post = mommy.make(Post)
         self.new_comment = mommy.make(PostComment)
-
-    def test_user_create(self):
-
-        self.assertTrue(isinstance(self.new_user, SurmandlUser))
 
     def test_post_create(self):
 
