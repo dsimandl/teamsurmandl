@@ -1,0 +1,24 @@
+body {
+    padding-top: 70px;
+    background: url("../img/cream_dust.png");
+}
+
+h1 {
+    font-family: 'Lobster', Helvetica, Arial, sans-serif;
+}
+
+.navbar, p, h2, #blog_title, .help-block, #clear_photo {
+    font-family: 'Cabin', Helvetica, Arial, sans-serif;
+}
+
+.navbar-fixed-top {
+    border-top: 4px solid #E6399B;
+}
+
+.carousel {
+    margin-top: -5px;
+}
+
+.carousel .item {
+    height: 400px;
+}

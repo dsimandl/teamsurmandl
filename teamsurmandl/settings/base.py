@@ -136,9 +136,9 @@ DJANGO_APPS = (
     # 'django.contrib.admindocs',
 )
 
-THIRD_PARTY_APPS = ('south', 'imagekit', 'debug_toolbar', 'memcache_status', 'taggit', 'django_extensions', 'django_summernote', 'avatar')
+THIRD_PARTY_APPS = ('south', 'imagekit', 'debug_toolbar', 'memcache_status', 'taggit', 'django_extensions', 'django_summernote', 'avatar', 'fabric')
 
-LOCAL_APPS = ('profiles','blog','gallery')
+LOCAL_APPS = ('profiles', 'blog', 'gallery')
 
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
