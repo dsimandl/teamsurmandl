@@ -8,3 +8,5 @@ gallery/migrations/*
 blog/migrations/*
 .idea/*
 uploads/*
+static/*
+.gitignore
