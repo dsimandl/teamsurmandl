@@ -29,7 +29,7 @@ paramiko==1.14.0
 pilkit==1.1.9
 psycopg2==2.5.3
 pycrypto==2.6.1
-pydot==1.0.28
+pydot==1.0.28 --allow-external pydot --allow-unverified pydot
 pyparsing==2.0.2
 pystache==0.5.4
 python-dateutil==2.2
