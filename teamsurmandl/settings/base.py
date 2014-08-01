@@ -23,6 +23,7 @@ else:
         for line in f:
             x = line.split("=")
             prod_settings = {x[0]: x[1]}
+    print prod_settings
     AWS_STORAGE_BUCKET_NAME = prod_settings['AWS_STORAGE_BUCKET_NAME']
     AWS_ACCESS_KEY_ID = prod_settings['AWS_ACCESS_KEY_ID']
     AWS_SECRET_ACCESS_KEY = prod_settings['AWS_SECRET_ACCESS_KEY']
