@@ -19,10 +19,11 @@ if DEBUG:
     POSTGRES_USER = os.environ['POSTGRES_USER']
     POSTGRES_PASSWORD = os.environ['POSTGRES_PASSWORD']
 else:
+    prod_settings = {}
     with open('teamsurmandl/settings/local_settings.txt', 'rt') as f:
         for line in f:
             x = line.split("=")
-            prod_settings = {x[0]: x[1]}
+            prod_settings[x[0]] = x[1]
     print prod_settings
     AWS_STORAGE_BUCKET_NAME = prod_settings['AWS_STORAGE_BUCKET_NAME']
     AWS_ACCESS_KEY_ID = prod_settings['AWS_ACCESS_KEY_ID']
