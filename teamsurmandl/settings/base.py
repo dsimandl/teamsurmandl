@@ -21,7 +21,8 @@ if DEBUG:
 else:
     with open('teamsurmandl/settings/local_settings.txt', 'rt') as f:
         for line in f:
-            prod_settings = dict(item.split("=") for item in line.split("="))
+            x = line.split("=")
+            prod_settings = {x[0]: x[1]}
     AWS_STORAGE_BUCKET_NAME = prod_settings['AWS_STORAGE_BUCKET_NAME']
     AWS_ACCESS_KEY_ID = prod_settings['AWS_ACCESS_KEY_ID']
     AWS_SECRET_ACCESS_KEY = prod_settings['AWS_SECRET_ACCESS_KEY']
