@@ -21,6 +21,7 @@ if DEBUG:
 else:
     prod_settings = {}
     settings_path = os.path.join(root, 'teamsurmandl', 'settings', 'local_settings')
+    print settings_path
     with open(settings_path, 'rt') as f:
         for line in f:
             line = line.rstrip('\n')
