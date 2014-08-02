@@ -20,7 +20,8 @@ if DEBUG:
     POSTGRES_PASSWORD = os.environ['POSTGRES_PASSWORD']
 else:
     prod_settings = {}
-    with open(os.path.join(root, 'teamsurmandl', 'settings', 'local_settings'), 'rt') as f:
+    settings_path = os.path.join(root, 'teamsurmandl', 'settings', 'local_settings')
+    with open(settings_path, 'rt') as f:
         for line in f:
             line = line.rstrip('\n')
             x = line.split("=")
