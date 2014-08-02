@@ -20,7 +20,8 @@ if DEBUG:
     POSTGRES_PASSWORD = os.environ['POSTGRES_PASSWORD']
 else:
     prod_settings = {}
-    with open('/home/ubuntu/www/teamsurmandl/teamsurmandl/settings/local_settings.txt', 'rt') as f:
+    path = os.path.abspath('teamsurmandl/settings/local_settings.txt')
+    with open(path, 'rt') as f:
         for line in f:
             line = line.rstrip('\n')
             x = line.split("=")
