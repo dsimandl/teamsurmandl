@@ -20,6 +20,7 @@ if DEBUG:
     POSTGRES_PASSWORD = os.environ['POSTGRES_PASSWORD']
 else:
     prod_settings = {}
+    print root
     settings_path = os.path.join(root, 'teamsurmandl', 'settings', 'local_settings')
     print settings_path
     with open(settings_path, 'rt') as f:
