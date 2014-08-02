@@ -20,7 +20,7 @@ if DEBUG:
     POSTGRES_PASSWORD = os.environ['POSTGRES_PASSWORD']
 else:
     prod_settings = {}
-    path = os.path.abspath('teamsurmandl/settings/local_settings.txt')
+    path = os.path.abspath('settings/local_settings.txt')
     with open(path, 'rt') as f:
         for line in f:
             line = line.rstrip('\n')
