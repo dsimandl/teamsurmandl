@@ -1,5 +1,8 @@
 from django.views.generic import ListView
 from django.core.exceptions import ImproperlyConfigured
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_protect
 
 from .models import Image, Album
 
@@ -10,8 +13,17 @@ class AlbumView(ListView):
     model = Image
     queryset = Image.objects.distinct('albums')
 
+    @method_decorator(csrf_protect)
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(AlbumView, self).dispatch(request, *args, **kwargs)
 
 class AlbumListView(ListView):
+
+    @method_decorator(csrf_protect)
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(AlbumListView, self).dispatch(request, *args, **kwargs)
 
     template_name = 'gallery/single_home.html'
     model = Image
@@ -33,6 +45,11 @@ class SlideShowView(ListView):
 
     template_name = 'gallery/slideshow.html'
     model = Image
+
+    @method_decorator(csrf_protect)
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(SlideShowView, self).dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
         if self.queryset is None:
