@@ -65,6 +65,11 @@ class PostListView(PublishedPostMixin,TagMixin, ListView):
     model = Post
     paginate_by = 5
 
+    @method_decorator(csrf_protect)
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(PostListView, self).dispatch(request, *args, **kwargs)
+
 class PostTagIndexView(TagMixin, ListView):
     """
     View to list our blog posts by tags
@@ -74,6 +79,11 @@ class PostTagIndexView(TagMixin, ListView):
     model = Post
     paginate_by = 5
     http_method_names = ['get', 'post']
+
+    @method_decorator(csrf_protect)
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(PostTagIndexView, self).dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
         return Post.objects.filter(tags__slug=self.kwargs.get('slug'), published=True)
@@ -85,6 +95,12 @@ class PostTitleIndexView(TagMixin, ListView, ):
     template_name = 'blog/post_list.html'
     model = Post
     paginate_by = 5
+
+
+    @method_decorator(csrf_protect)
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(PostTitleIndexView, self).dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
         title_search = self.request.GET['title_search']
