@@ -3,33 +3,33 @@ import dj_database_url
 
 from secert_key import *
 
-here = lambda * x: os.path.join(os.path.abspath(os.path.dirname(__file__)), *x)
+here = lambda *x: os.path.join(os.path.abspath(os.path.dirname(__file__)), *x)
 
 PROJECT_ROOT = here("..")
 # root() gives us file paths from the root of the system to whatever
 # folder(s) we pass it starting at the parent directory of the current file.
-root = lambda * x: os.path.join(os.path.abspath(PROJECT_ROOT), *x)
+root = lambda *x: os.path.join(os.path.abspath(PROJECT_ROOT), *x)
 
-DEBUG = True
+DEBUG = False
 
-#if DEBUG:
-#    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
-#    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-#    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-#    POSTGRES_USER = os.environ['POSTGRES_USER']
-#    POSTGRES_PASSWORD = os.environ['POSTGRES_PASSWORD']
-#else:
-prod_settings = {}
-with open(root("..", "teamsurmandl/settings/local_settings.txt"), 'rt') as f:
-    for line in f:
-        line = line.rstrip('\n')
-        x = line.split("=")
-        prod_settings[x[0]] = x[1]
-AWS_STORAGE_BUCKET_NAME = prod_settings['AWS_STORAGE_BUCKET_NAME']
-AWS_ACCESS_KEY_ID = prod_settings['AWS_ACCESS_KEY_ID']
-AWS_SECRET_ACCESS_KEY = prod_settings['AWS_SECRET_ACCESS_KEY']
-POSTGRES_USER = prod_settings['POSTGRES_USER']
-POSTGRES_PASSWORD = prod_settings['POSTGRES_PASSWORD']
+if DEBUG:
+    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+    POSTGRES_USER = os.environ['POSTGRES_USER']
+    POSTGRES_PASSWORD = os.environ['POSTGRES_PASSWORD']
+else:
+    prod_settings = {}
+    with open(root("..", "teamsurmandl/settings/local_settings.txt"), 'rt') as f:
+        for line in f:
+            line = line.rstrip('\n')
+            x = line.split("=")
+            prod_settings[x[0]] = x[1]
+    AWS_STORAGE_BUCKET_NAME = prod_settings['AWS_STORAGE_BUCKET_NAME']
+    AWS_ACCESS_KEY_ID = prod_settings['AWS_ACCESS_KEY_ID']
+    AWS_SECRET_ACCESS_KEY = prod_settings['AWS_SECRET_ACCESS_KEY']
+    POSTGRES_USER = prod_settings['POSTGRES_USER']
+    POSTGRES_PASSWORD = prod_settings['POSTGRES_PASSWORD']
 
 TEMPLATE_DEBUG = False
 
@@ -43,13 +43,14 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'surmandlsite',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'surmandlsite',  # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': POSTGRES_USER,
         'PASSWORD': POSTGRES_PASSWORD,
-        'HOST': 'localhost',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'HOST': 'localhost',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '',  # Set to empty string for default.
     }
 }
 
@@ -99,9 +100,9 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (root("..", "assets"),
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+                    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+                    # Always use forward slashes, even on Windows.
+                    # Don't forget to use absolute paths, not relative paths.
 )
 
 # List of finder classes that know how to find static files in
@@ -118,7 +119,7 @@ SECRET_KEY = generate_secret_key()
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-# 'django.template.loaders.eggs.Loader',
+    # 'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -132,15 +133,14 @@ MIDDLEWARE_CLASSES = (
 
 )
 
-
 ROOT_URLCONF = 'teamsurmandl.urls'
 
 WSGI_APPLICATION = 'teamsurmandl.wsgi.application'
 
 TEMPLATE_DIRS = (root("templates"),
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+                 # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+                 # Always use forward slashes, even on Windows.
+                 # Don't forget to use absolute paths, not relative paths.
 )
 
 DJANGO_APPS = (
@@ -158,10 +158,11 @@ DJANGO_APPS = (
     # 'django.contrib.admindocs',
 )
 
-THIRD_PARTY_APPS = ('south', 'imagekit', 'debug_toolbar', 'memcache_status', 'taggit', 'django_extensions', 'django_summernote', 'avatar', 'fabric')
+THIRD_PARTY_APPS = (
+'south', 'imagekit', 'debug_toolbar', 'memcache_status', 'taggit', 'django_extensions', 'django_summernote', 'avatar',
+'fabric')
 
 LOCAL_APPS = ('profiles', 'blog', 'gallery')
-
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -210,14 +211,14 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-'django.contrib.auth.context_processors.auth',
-'django.core.context_processors.debug',
-'django.core.context_processors.i18n',
-'django.core.context_processors.media',
-'django.core.context_processors.static',
-'django.core.context_processors.tz',
-'django.core.context_processors.request',
-'django.contrib.messages.context_processors.messages',
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
 )
 
 SOUTH_MIGRATION_MODULES = {
@@ -229,10 +230,9 @@ try:
 except Exception as e:
     print e.message
 
-#if not DEBUG:
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-DEFAULT_FILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
-STATIC_URL = S3_URL
-
-DEBUG_TOOLBAR_PATCH_SETTINGS = False
+if not DEBUG:
+    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    DEFAULT_FILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+    STATIC_URL = S3_URL
+    DEBUG_TOOLBAR_PATCH_SETTINGS = False
