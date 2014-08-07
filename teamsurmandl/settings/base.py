@@ -12,24 +12,17 @@ root = lambda *x: os.path.join(os.path.abspath(PROJECT_ROOT), *x)
 
 DEBUG = False
 
-if DEBUG:
-    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
-    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-    POSTGRES_USER = os.environ['POSTGRES_USER']
-    POSTGRES_PASSWORD = os.environ['POSTGRES_PASSWORD']
-else:
-    prod_settings = {}
-    with open(root("..", "teamsurmandl/settings/local_settings.txt"), 'rt') as f:
-        for line in f:
-            line = line.rstrip('\n')
-            x = line.split("=")
-            prod_settings[x[0]] = x[1]
-    AWS_STORAGE_BUCKET_NAME = prod_settings['AWS_STORAGE_BUCKET_NAME']
-    AWS_ACCESS_KEY_ID = prod_settings['AWS_ACCESS_KEY_ID']
-    AWS_SECRET_ACCESS_KEY = prod_settings['AWS_SECRET_ACCESS_KEY']
-    POSTGRES_USER = prod_settings['POSTGRES_USER']
-    POSTGRES_PASSWORD = prod_settings['POSTGRES_PASSWORD']
+prod_settings = {}
+with open(root("..", "teamsurmandl/settings/local_settings.txt"), 'rt') as f:
+    for line in f:
+        line = line.rstrip('\n')
+        x = line.split("=")
+        prod_settings[x[0]] = x[1]
+AWS_STORAGE_BUCKET_NAME = prod_settings['AWS_STORAGE_BUCKET_NAME']
+AWS_ACCESS_KEY_ID = prod_settings['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = prod_settings['AWS_SECRET_ACCESS_KEY']
+POSTGRES_USER = prod_settings['POSTGRES_USER']
+POSTGRES_PASSWORD = prod_settings['POSTGRES_PASSWORD']
 
 TEMPLATE_DEBUG = False
 
