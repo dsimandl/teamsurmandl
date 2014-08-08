@@ -23,12 +23,27 @@
         <div class="row">
             <div class="col-lg-12">
             {% for image in image_list %}
-                <div class="col-md-2">
-                    <label for="alumbimgthumb">{% for album in image.albums.all %}
-                        <a href="{% url "gallery:images" album.id %}">{{ album.title }}</a>
-                    {% endfor %}</label>
-                    <img src="{{ image.image_thumb.url }}" alt="{{ image.title }}" class="img-rounded" id="alumbimgthumb">
-                </div>
+                {% for album in image.albums.all %}
+                    {% for album_users in album.authorized_users.all %}
+                        {% if album_users.email == user.email %}
+                            <div class="col-md-2">
+                                <label for="alumbimgthumb">
+                                    <a href="{% url "gallery:images" album.id %}">{{ album.title }}</a>
+                                </label>
+                            <img src="{{ image.image_thumb.url }}" alt="{{ image.title }}" class="img-rounded" id="alumbimgthumb">
+                            </div>
+                        {% endif %}
+                    {% empty %}
+                        {% if album.all_users == True %}
+                            <div class="col-md-2">
+                                <label for="alumbimgthumb">
+                                    <a href="{% url "gallery:images" album.id %}">{{ album.title }}</a>
+                                </label>
+                            <img src="{{ image.image_thumb.url }}" alt="{{ image.title }}" class="img-rounded" id="alumbimgthumb">
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
             {% endfor %}
             </div>
         </div>
