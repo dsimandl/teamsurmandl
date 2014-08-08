@@ -17,8 +17,8 @@ from profiles.models import SurmandlUser
 class Album(models.Model):
     title = models.CharField(max_length=60)
     public = models.BooleanField(default=False)
-    all_users = models.BooleanField(default=True)
-    authorized_users = models.ManyToManyField(SurmandlUser, null=True, blank=True)
+    #all_users = models.BooleanField(default=True)
+    #authorized_users = models.ManyToManyField(SurmandlUser, null=True, blank=True)
 
     def __unicode__(self):
         return self.title
