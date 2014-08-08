@@ -10,7 +10,7 @@ PROJECT_ROOT = here("..")
 # folder(s) we pass it starting at the parent directory of the current file.
 root = lambda *x: os.path.join(os.path.abspath(PROJECT_ROOT), *x)
 
-DEBUG = False
+DEBUG = True
 
 prod_settings = {}
 with open(root("..", "teamsurmandl/settings/local_settings.txt"), 'rt') as f:
