@@ -23,11 +23,6 @@ class Album(models.Model):
     def __unicode__(self):
         return self.title
 
-    def save(self, *args, **kwargs):
-        if self.all_users and self.authorized_users is not None:
-            self.all_users = False
-        super(Album, self).save(*args, **kwargs)
-
 class ImageBatchUpload(models.Model):
     title = models.CharField(max_length=60, blank=True, help_text="If supplied here, images uploaded will be given this "
                                                       "title plus a sequential number. "

@@ -3,8 +3,23 @@ import imghdr
 
 from django import forms
 
-from .models import Image, ImageBatchUpload
+from .models import Image, ImageBatchUpload, Album
 
+
+class AlbumAdminForm(forms.ModelForm):
+
+    class Meta:
+        model = Album
+        fields = '__all__'
+
+    def clean(self):
+
+        cleaned_data = self.cleaned_data
+
+        if cleaned_data.get('all_users') and cleaned_data.get('authorized_users').count() != 0:
+            cleaned_data['all_users'] = False
+
+        return cleaned_data
 
 class ImageAdminForm(forms.ModelForm):
 
