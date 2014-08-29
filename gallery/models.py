@@ -90,6 +90,6 @@ class Image(models.Model):
     tags = TaggableManager(blank=True)
 
     def __unicode__(self):
-        return self.image.name
+        return self.title
 
 

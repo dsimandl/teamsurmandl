@@ -16,8 +16,11 @@ class AlbumAdminForm(forms.ModelForm):
 
         cleaned_data = self.cleaned_data
 
-        if cleaned_data.get('all_users') and cleaned_data.get('authorized_users').count() != 0:
-            cleaned_data['all_users'] = False
+        if cleaned_data.get('authorized_users') is None:
+            pass
+        else:
+            if cleaned_data.get('all_users') and cleaned_data.get('authorized_users').count() != 0:
+                cleaned_data['all_users'] = False
 
         return cleaned_data
 
