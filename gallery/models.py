@@ -29,7 +29,7 @@ class ImageBatchUpload(models.Model):
                              help_text="If supplied here, images uploaded will be given this "
                                        "title plus a sequential number. "
                                        "If no title is supplied, the title will be the image filename")
-    zip_file = models.FileField(help_text="Select a .zip file to upload into the album")
+    zip_file = models.FileField(upload_to='gallery/temp', help_text="Select a .zip file to upload into the album")
     albums = models.ForeignKey(Album, help_text="Select an album to add the images too.")
     user = models.ForeignKey(SurmandlUser, null=True)
     public = models.BooleanField(default=False, help_text="Click here to make these images public")
