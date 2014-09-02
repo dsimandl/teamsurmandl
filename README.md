@@ -14,5 +14,6 @@ TODO
 5.  404 Page
 6.  Security (Two scoops chapter on this)
 7.  More tests
+8.  Celery and RabbitMQ for zip file image uploads
 
 
