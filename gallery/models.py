@@ -70,8 +70,7 @@ class ImageBatchUpload(models.Model):
                           public=self.public,
                           user=self.user, )
             content_file = ContentFile(data)
-            image_file = ImageFile(content_file)
-            image.image.save(file_name, image_file)
+            image.image.save(file_name, content_file)
             image.save()
             image.albums.add(self.albums)
             image.save()
