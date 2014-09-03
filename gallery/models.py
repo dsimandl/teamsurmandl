@@ -4,6 +4,7 @@ import time
 from io import BytesIO
 
 from django.db import models
+from django.core.files.base import ContentFile
 from django.core.files.images import ImageFile
 from django.utils.image import Image as D_Image
 
@@ -68,8 +69,9 @@ class ImageBatchUpload(models.Model):
                           created=time.time(),
                           public=self.public,
                           user=self.user, )
-            content_file = ImageFile(data)
-            image.image.save(file_name, content_file)
+            content_file = ContentFile(data)
+            image_file = ImageFile(content_file)
+            image.image.save(file_name, image_file)
             image.save()
             image.albums.add(self.albums)
             image.save()
