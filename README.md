@@ -7,13 +7,17 @@ This is the work in progress site for team surmandl.  So far it includes a login
 TODO
 ========
 
-1.  Front end validation for blog posts
-2.  Display avatars for users in comment posts
-3.  Style avatar add page like avatar change page
-4.  Clear the session but not the user....
-5.  404 Page
-6.  Security (Two scoops chapter on this)
-7.  More tests
-8.  Celery and RabbitMQ for zip file image uploads
+1.  Figure out why images are being imported upside down (Has to do with file Content type?)
+2.  Shrink image size on import
+3.  Ajax for image page loading and for image carrosle loading
+4.  Delete images off of s3 when image is deleted via admin console
+5.  Front end validation for blog posts
+6.  Display avatars for users in comment posts
+7.  Style avatar add page like avatar change page
+8.  Clear the session but not the user....
+9.  404 Page
+10.  Security (Two scoops chapter on this)
+11.  More tests
+12.  Celery and RabbitMQ for zip file image uploads
 
 

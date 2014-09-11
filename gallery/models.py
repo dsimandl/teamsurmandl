@@ -1,15 +1,13 @@
-import os
 import zipfile
 import time
 from io import BytesIO
 
 from django.db import models
 from django.core.files.base import ContentFile
-from django.core.files.images import ImageFile
 from django.utils.image import Image as D_Image
 
 from imagekit.models import ProcessedImageField, ImageSpecField
-from imagekit.processors import ResizeToFill
+from imagekit.processors import ResizeToFill, Transpose
 from taggit.managers import TaggableManager
 
 from profiles.models import SurmandlUser
@@ -81,7 +79,7 @@ class ImageBatchUpload(models.Model):
 
 class Image(models.Model):
     title = models.CharField(max_length=60, null=True)
-    image = ProcessedImageField(upload_to='gallery', format='JPEG', verbose_name='Image', blank=True)
+    image = ProcessedImageField(upload_to='gallery', processors=[Transpose()], format='JPEG', verbose_name='Image', blank=True)
     image_thumb = ImageSpecField(source='image', processors=[ResizeToFill(140, 140)], format='JPEG',
                                  options={'quality': 60})
     albums = models.ManyToManyField(Album, null=True)
