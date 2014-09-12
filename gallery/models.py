@@ -58,7 +58,7 @@ class ImageBatchUpload(models.Model):
                 opened = D_Image.open(file)
                 opened.verify()
             except Exception:
-                raise Exception('"%s" is a bad image file' % format(data))
+                raise Exception('"%s" is a bad image file' % format(file_name))
             if not self.title:
                 title = '_'.join([format(file_name), str(count)])
             else:
