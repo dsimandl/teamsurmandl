@@ -79,7 +79,7 @@ class ImageBatchUpload(models.Model):
 
 class Image(models.Model):
     title = models.CharField(max_length=60, null=True)
-    image = ProcessedImageField(upload_to='gallery', processors=[Transpose(), SmartResize(555, 417)], format='JPEG', verbose_name='Image', blank=True)
+    image = ProcessedImageField(upload_to='gallery', processors=[Transpose(), SmartResize(555, 417)], format='JPEG', verbose_name='Image')
     image_thumb = ImageSpecField(source='image', processors=[ResizeToFill(140, 140)], format='JPEG',
                                  options={'quality': 60})
     albums = models.ManyToManyField(Album, null=True)
@@ -91,5 +91,3 @@ class Image(models.Model):
 
     def __unicode__(self):
         return self.title
-
-
