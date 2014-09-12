@@ -1,3 +1,5 @@
+import itertools
+
 from django.views.generic import ListView
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.decorators import method_decorator
@@ -62,5 +64,14 @@ class SlideShowView(ListView):
     def get_context_data(self, **kwargs):
         context = super(SlideShowView, self).get_context_data(**kwargs)
         image_album = Album.objects.get(id=self.kwargs.get("album_id"))
-        context.update({'album_images': image_album.image_set.all()})
+        img_list = list(image_album.image_set.all())
+
+        for x, img in enumerate(img_list):
+            if img.id == context["object_list"].id:
+                new_album_list = img_list[x:len(img_list)]
+                new_album_list += img_list[0:x]
+                break
+
+        context.update({'album_images': new_album_list})
         return context
+
