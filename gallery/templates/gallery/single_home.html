@@ -1,5 +1,9 @@
 {% extends "_layouts/base_head_nav.html" %}
 
+{% block gallery_home_css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/single-gallery.css" type="text/css"/>
+{% endblock %}
+
 {% block page_title %}Albums | {% endblock %}
 
 {% block page_content %}
@@ -21,17 +25,17 @@
                 </ol>
             </div>
         </div>
+        <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
                 {% for image in image_list %}
-                    <div class="col-md-2">
-                        <label for="imgthumb">
-                            <a href="{% url "gallery:images_show" image.id album_id %}">{{ image.title }}</a></label>
-                        <img src="{{ image.image_thumb.url }}" alt="{{ image.title }}" class="img-rounded"
-                             id="imgthumb">
+                        <div class="col-md-2">
+                        <a href="{% url "gallery:images_show" image.id album_id %}"><img src="{{ image.image_thumb.url }}" alt="{{ image.title }}" class="img-rounded"
+                             id="imgthumb"></a>
                     </div>
                 {% endfor %}
             </div>
         </div>
+    </div>
 </div>
 {% endblock %}
