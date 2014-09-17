@@ -40,6 +40,7 @@ class ImageBatchUpload(models.Model):
         self.process_zipfile()
         super(ImageBatchUpload, self).delete()
 
+    # We will break this out into a celery task.  IE, will go into the celery tasks.py!
     def process_zipfile(self):
         zip = zipfile.ZipFile(self.zip_file)
         bad_file = zip.testzip()
