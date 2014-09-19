@@ -1,10 +1,6 @@
-import zipfile
-import time
-from io import BytesIO
+import logging
 
 from django.db import models
-from django.core.files.base import ContentFile
-from django.utils.image import Image as D_Image
 
 from imagekit.models import ProcessedImageField, ImageSpecField
 from imagekit.processors import ResizeToFill, Transpose, SmartResize
@@ -37,46 +33,9 @@ class ImageBatchUpload(models.Model):
 
     def save(self, *args, **kwargs):
         super(ImageBatchUpload, self).save(*args, **kwargs)
-        self.process_zipfile()
+        from .tasks import upload_zip
+        upload_zip.delay(self)
         super(ImageBatchUpload, self).delete()
-
-    # We will break this out into a celery task.  IE, will go into the celery tasks.py!
-    def process_zipfile(self):
-        zip = zipfile.ZipFile(self.zip_file)
-        bad_file = zip.testzip()
-        if bad_file:
-            zip.close()
-            raise Exception('"%s" in zip archive is corrupt' % bad_file)
-        count = 1
-        for file_name in sorted(zip.namelist()):
-            if file_name.startswith('__') or file_name.startswith('.'):
-                continue
-            data = zip.read(file_name)
-            if not len(data):
-                continue
-            try:
-                file = BytesIO(data)
-                opened = D_Image.open(file)
-                opened.verify()
-            except Exception:
-                raise Exception('"%s" is a bad image file' % format(file_name))
-            if not self.title:
-                title = '_'.join([format(file_name), str(count)])
-            else:
-                title = '_'.join([self.title, str(count)])
-            image = Image(title=title,
-                          created=time.time(),
-                          public=self.public,
-                          user=self.user, )
-            content_file = ContentFile(data)
-            image.image.save(file_name, content_file)
-            image.save()
-            image.albums.add(self.albums)
-            image.save()
-            count += 1
-        zip.close()
-        return ""
-
 
 class Image(models.Model):
     title = models.CharField(max_length=60, null=True)

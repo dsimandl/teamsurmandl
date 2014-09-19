@@ -1,5 +1,6 @@
 import os
 import dj_database_url
+import djcelery
 
 from secert_key import *
 
@@ -23,6 +24,7 @@ AWS_ACCESS_KEY_ID = prod_settings['AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = prod_settings['AWS_SECRET_ACCESS_KEY']
 POSTGRES_USER = prod_settings['POSTGRES_USER']
 POSTGRES_PASSWORD = prod_settings['POSTGRES_PASSWORD']
+BROKER_STR = prod_settings['BROKER_URL']
 
 TEMPLATE_DEBUG = False
 
@@ -153,7 +155,7 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = (
 'south', 'imagekit', 'debug_toolbar', 'memcache_status', 'taggit', 'django_extensions', 'django_summernote', 'avatar',
-'fabric')
+'fabric', 'djcelery',)
 
 LOCAL_APPS = ('profiles', 'blog', 'gallery')
 
@@ -217,6 +219,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 SOUTH_MIGRATION_MODULES = {
     'taggit': 'taggit.south_migrations',
 }
+
+BROKER_URL = BROKER_STR
+
+djcelery.setup_loader()
 
 try:
     from local_settings import *
