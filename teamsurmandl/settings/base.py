@@ -222,8 +222,6 @@ SOUTH_MIGRATION_MODULES = {
 
 BROKER_URL = BROKER_STR
 
-djcelery.setup_loader()
-
 try:
     from local_settings import *
 except Exception as e:
