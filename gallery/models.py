@@ -59,8 +59,12 @@ class Image(models.Model):
 def delete_img_aws(instance, **kwargs):
     conn = S3Connection(settings.AWS_ACCESS_KEY_ID, settings.AWS_SECRET_ACCESS_KEY)
     b = Bucket(conn, settings.AWS_STORAGE_BUCKET_NAME)
-    k = Key(b)
-    k.key = instance.image.name
-    b.delete_key(k)
+    img_k = Key(b)
+    img_thumb_k = Key(b)
+    img_k.key = instance.image.name
+    img_thumb_k.key = instance.image_thumb.name
+    b.delete_key(img_k)
+    b.delete_key(img_thumb_k)
+
 
 
