@@ -1,6 +1,5 @@
 import os
 import dj_database_url
-import djcelery
 
 from secert_key import *
 
@@ -154,8 +153,9 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
-'south', 'imagekit', 'debug_toolbar', 'memcache_status', 'taggit', 'django_extensions', 'django_summernote', 'avatar',
-'fabric', 'djcelery',)
+    'south', 'imagekit', 'debug_toolbar', 'memcache_status', 'taggit', 'django_extensions', 'django_summernote',
+    'avatar',
+    'fabric', 'djcelery',)
 
 LOCAL_APPS = ('profiles', 'blog', 'gallery')
 

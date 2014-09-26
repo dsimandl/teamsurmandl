@@ -1,5 +1,3 @@
-import itertools
-
 from django.views.generic import ListView
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.decorators import method_decorator

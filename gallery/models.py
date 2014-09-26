@@ -1,10 +1,12 @@
-import logging
-
 from django.db import models
+from django.db.models.signals import pre_delete
+from django.dispatch.dispatcher import receiver
+from django.conf import settings
 
 from imagekit.models import ProcessedImageField, ImageSpecField
 from imagekit.processors import ResizeToFill, Transpose, SmartResize
 from taggit.managers import TaggableManager
+from boto.s3.connection import S3Connection, Bucket, Key
 
 from profiles.models import SurmandlUser
 
@@ -51,3 +53,14 @@ class Image(models.Model):
 
     def __unicode__(self):
         return self.title
+
+
+@receiver(pre_delete, sender=Image)
+def delete_img_aws(instance, **kwargs):
+    conn = S3Connection(settings.AWS_ACCESS_KEY_ID, settings.AWS_SECRET_ACCESS_KEY)
+    b = Bucket(conn, settings.AWS_STORAGE_BUCKET_NAME)
+    k = Key(b)
+    k.key = instance.image.name
+    b.delete_key(k)
+
+
