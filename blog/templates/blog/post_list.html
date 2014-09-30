@@ -22,8 +22,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-8">
-                <h1>
+            <div class="col-md-8">
                     {% for post in post_list %}
                         <h1 id="blog_title">
                             <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
@@ -42,12 +41,11 @@
                         </p>
                         <a class="btn btn-primary" href="{{ post.get_absolute_url }}">Read More</a>
                     {% empty %}
-                        <li>Sorry, no posts....</li>
+                        <h2>Sorry, no posts....</h2>
                     {% endfor %}
-                </h1>
             </div>
             {% if user.is_staff %}
-                <div class="col-lg-4">
+                <div class="col-md-4 col-md-offset-8">
                     <div class="well">
                             <label for="post_link">Working with content</label>
                             <p>
@@ -56,7 +54,7 @@
                     </div>
                 </div>
             {% endif %}
-            <div class="col-lg-4">
+            <div class="col-md-4 col-md-offset-8">
                 <div class="well">
                     <label for="tag_link">Search for a blog by tag</label>
                     <p>
@@ -68,7 +66,7 @@
                     </p>
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-md-4 col-md-offset-8">
                 <div class="well">
                     <form role="form" method="get" action="{% url 'blog:search' %}">
                         <label for="title_search">Search for a blog by title</label>
