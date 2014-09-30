@@ -6,7 +6,7 @@ This is the work in progress site for team surmandl.  So far it includes a login
 
 TODO
 ========
-1.  Figure out why Sorry no posts, and wells are not lining up correctly
+1.  Seperate photo tags from blog tags
 2.  Ajax for image page loading and for image carrosle loading and memcache
 3.  Front end validation for blog posts
 4   This for initial user instructions: http://heelhook.github.io/chardin.js/?hn
