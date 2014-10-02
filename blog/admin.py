@@ -11,7 +11,7 @@ class PostAdmin(SummernoteModelAdmin):
     """
 
     date_hierarchy = 'created_at'
-    fields = ('published', 'title', 'author', 'content', 'post_tags', 'slug')
+    fields = ('published', 'title', 'author', 'content', 'tags', 'slug')
     list_display = ['published', 'title', 'updated_at']
     list_display_links = ['title']
     list_editable = ['published']
