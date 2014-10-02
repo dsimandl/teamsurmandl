@@ -86,7 +86,7 @@ class PostTagIndexView(TagMixin, ListView):
         return super(PostTagIndexView, self).dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
-        return Post.objects.filter(tags__slug=self.kwargs.get('slug'), published=True)
+        return Post.objects.filter(post_tags__slug=self.kwargs.get('slug'), published=True)
 
 class PostTitleIndexView(TagMixin, ListView, ):
     """

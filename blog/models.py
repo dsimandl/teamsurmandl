@@ -31,7 +31,7 @@ class Post (models.Model):
     photo = ProcessedImageField(upload_to='blog', processors=[ResizeToFill(400, 300)], format='JPEG', options={'quality': 60}, verbose_name='Photo for blog post', blank=True)
     author = models.ForeignKey(SurmandlUser, limit_choices_to={'is_staff':True},related_name='posts', verbose_name='Author for blog posts')
 
-    tags = TaggableManager(blank=True)
+    post_tags = TaggableManager(blank=True)
 
     objects = PostManager()
 
