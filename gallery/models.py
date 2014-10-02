@@ -5,7 +5,6 @@ from django.conf import settings
 
 from imagekit.models import ProcessedImageField, ImageSpecField
 from imagekit.processors import ResizeToFill, Transpose, SmartResize
-from taggit.managers import TaggableManager
 from boto.s3.connection import S3Connection, Bucket, Key
 
 from profiles.models import SurmandlUser
@@ -31,8 +30,6 @@ class ImageBatchUpload(models.Model):
     user = models.ForeignKey(SurmandlUser, null=True)
     public = models.BooleanField(default=False, help_text="Click here to make these images public")
 
-    tags = models.CharField(max_length=255, blank=True)
-
     def save(self, *args, **kwargs):
         super(ImageBatchUpload, self).save(*args, **kwargs)
         from .tasks import upload_zip
@@ -49,8 +46,6 @@ class Image(models.Model):
     public = models.BooleanField(default=False)
     user = models.ForeignKey(SurmandlUser, null=True)
 
-    tags = TaggableManager(blank=True)
-
     def __unicode__(self):
         return self.title
 
@@ -65,6 +60,3 @@ def delete_img_aws(instance, **kwargs):
     img_thumb_k.key = instance.image_thumb.name
     b.delete_key(img_k)
     b.delete_key(img_thumb_k)
-
-
-

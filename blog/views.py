@@ -1,12 +1,12 @@
 import json
 
-from django.views.generic import ListView, DetailView, FormView
+from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormMixin, ProcessFormView
 from django.utils.decorators import method_decorator
 from django.core.serializers.json import DjangoJSONEncoder
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse
 
 from taggit.models import Tag
 
@@ -86,7 +86,7 @@ class PostTagIndexView(TagMixin, ListView):
         return super(PostTagIndexView, self).dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
-        return Post.objects.filter(tags__slug=self.kwargs.get('slug'), published=True)
+        return Post.objects.filter(post_tags__slug=self.kwargs.get('slug'), published=True)
 
 class PostTitleIndexView(TagMixin, ListView, ):
     """

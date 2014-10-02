@@ -28,7 +28,7 @@ class ImageAdminForm(forms.ModelForm):
 
     class Meta:
         model = Image
-        fields = ('public', 'title', 'image', 'albums', 'user', 'tags')
+        fields = ('public', 'title', 'image', 'albums', 'user')
 
     def clean_image(self):
         image = self.cleaned_data['image']
@@ -43,7 +43,7 @@ class ImageBatchUploadAdminForm(forms.ModelForm):
 
     class Meta:
         model = ImageBatchUpload
-        fields = ('public', 'title', 'zip_file', 'albums', 'user', 'tags')
+        fields = ('public', 'title', 'zip_file', 'albums', 'user')
 
     def clean_zip_file(self):
         image_zip = self.cleaned_data['zip_file']
