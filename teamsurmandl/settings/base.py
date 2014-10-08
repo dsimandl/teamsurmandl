@@ -157,7 +157,7 @@ THIRD_PARTY_APPS = (
     'avatar',
     'fabric', 'djcelery',)
 
-LOCAL_APPS = ('profiles', 'blog', 'gallery')
+LOCAL_APPS = ('profiles', 'blog', 'gallery', 'location',)
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
