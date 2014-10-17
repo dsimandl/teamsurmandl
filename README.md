@@ -6,8 +6,7 @@ This is the work in progress site for team surmandl.  So far it includes a login
 
 TODO
 ========
-1.  Allow users to set a new password in the profile form
-2.  Do where are we section....
+2.  Add pointer image to we are currently here map
 3.  Ajax for image page loading and for image carrosle loading and memcache
 4.  Front end validation for blog posts
 5   This for initial user instructions: http://heelhook.github.io/chardin.js/?hn
