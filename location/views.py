@@ -1,10 +1,13 @@
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import Http404
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 
+from .models import Location
 
-class CurrentLocation(TemplateView):
+class CurrentLocation(DetailView):
 
     template_name = 'location/current_location.html'
 
@@ -13,6 +16,13 @@ class CurrentLocation(TemplateView):
     def dispatch(self, request, *args, **kwargs):
         return super(CurrentLocation, self).dispatch(request, *args, **kwargs)
 
+    def get_object(self, queryset=None):
+        try:
+            obj = Location.objects.get(current_location=True)
+        except ObjectDoesNotExist:
+            raise Http404(_("No %(verbose_name)s found matching the query") %
+                      {'verbose_name': queryset.model._meta.verbose_name})
+        return obj
 
 class PastLocations(TemplateView):
 
