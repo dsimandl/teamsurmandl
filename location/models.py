@@ -5,7 +5,7 @@ from profiles.models import SurmandlUser
 
 
 class Location(models.Model):
-    location_title = models.CharField('Current Location', max_length=255)
+    location_title = models.CharField('Location Name', max_length=255)
     map_center_longitude = models.CharField(max_length=10, null=False)
     map_center_latitude = models.CharField(max_length=10, null=False)
     pin_longitude = models.CharField(max_length=10, null=False)

@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import DetailView, ListView
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 from django.utils.decorators import method_decorator
@@ -24,10 +24,17 @@ class CurrentLocation(DetailView):
                       {'verbose_name': queryset.model._meta.verbose_name})
         return obj
 
-class PastLocations(TemplateView):
+class PastLocations(ListView):
 
     template_name = 'location/past_locations.html'
+    model = Location
+    paginate_by = 5
+
     @method_decorator(csrf_protect)
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super(PastLocations, self).dispatch(request, *args, **kwargs)
+
+    def get_queryset(self):
+        queryset = super(PastLocations, self).get_queryset()
+        return queryset.filter(current_location=False)

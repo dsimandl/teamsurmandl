@@ -8,15 +8,15 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'Location.test_field'
-        db.add_column(u'location_location', 'test_field',
-                      self.gf('django.db.models.fields.CharField')(max_length=50, null=True),
+        # Adding field 'Location.location_title'
+        db.add_column(u'location_location', 'location_title',
+                      self.gf('django.db.models.fields.CharField')(default='test', max_length=255),
                       keep_default=False)
 
 
     def backwards(self, orm):
-        # Deleting field 'Location.test_field'
-        db.delete_column(u'location_location', 'test_field')
+        # Deleting field 'Location.location_title'
+        db.delete_column(u'location_location', 'location_title')
 
 
     models = {
@@ -49,8 +49,7 @@ class Migration(SchemaMigration):
             'map_center_latitude': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
             'map_center_longitude': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
             'pin_latitude': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
-            'pin_longitude': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
-            'test_field': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True'})
+            'pin_longitude': ('django.db.models.fields.CharField', [], {'max_length': '10'})
         },
         u'profiles.surmandluser': {
             'Meta': {'object_name': 'SurmandlUser'},

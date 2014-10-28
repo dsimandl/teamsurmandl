@@ -11,7 +11,6 @@ class Migration(SchemaMigration):
         # Adding model 'Location'
         db.create_table(u'location_location', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('location_title', self.gf('django.db.models.fields.CharField')(max_length=255)),
             ('map_center_longitude', self.gf('django.db.models.fields.CharField')(max_length=10)),
             ('map_center_latitude', self.gf('django.db.models.fields.CharField')(max_length=10)),
             ('pin_longitude', self.gf('django.db.models.fields.CharField')(max_length=10)),
@@ -53,7 +52,6 @@ class Migration(SchemaMigration):
             'author': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'location'", 'to': u"orm['profiles.SurmandlUser']"}),
             'current_location': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'location_title': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'map_center_latitude': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
             'map_center_longitude': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
             'pin_latitude': ('django.db.models.fields.CharField', [], {'max_length': '10'}),

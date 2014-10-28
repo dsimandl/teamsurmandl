@@ -21,55 +21,60 @@
             </div>
         </div>
         <div class="row">
-            <div id="map" class="map"></div>
-            <script type="text/javascript">
-                var vectorSource = new ol.source.Vector({
-                    // Create empty vector
-                });
+            <div class="col-md-12">
+                <h4>{{ location.location_title }}</h4>
 
-                var iconFeature = new ol.Feature({
-                    geometry: new ol.geom.Point(
-                            ol.proj.transform([{{ location.pin_longitude }}, {{ location.pin_latitude }}], 'EPSG:4326', 'EPSG:3857')
-                    ),
-                    name: 'Surmandl HQ'
-                });
+                <div id="map" class="map"></div>
+                <script type="text/javascript">
+                    var vectorSource = new ol.source.Vector({
+                        // Create empty vector
+                    });
 
-                vectorSource.addFeature(iconFeature);
+                    var iconFeature = new ol.Feature({
+                        geometry: new ol.geom.Point(
+                                ol.proj.transform([{{ location.pin_longitude }}, {{ location.pin_latitude }}], 'EPSG:4326', 'EPSG:3857')
+                        ),
+                        name: 'Surmandl HQ'
+                    });
 
-                //create the style
-                var iconStyle = new ol.style.Style({
-                    image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
-                        anchor: [0.5, 46],
-                        anchorXUnits: 'fraction',
-                        anchorYUnits: 'pixels',
-                        opacity: 0.75,
-                        src: 'http://ol3js.org/en/master/examples/data/icon.png'
-                    }))
-                });
+                    vectorSource.addFeature(iconFeature);
 
-                var vectorLayer = new ol.layer.Vector({
-                    source: vectorSource,
-                    style: iconStyle
-                });
+                    //create the style
+                    var iconStyle = new ol.style.Style({
+                        image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+                            anchor: [0.5, 46],
+                            anchorXUnits: 'fraction',
+                            anchorYUnits: 'pixels',
+                            opacity: 0.75,
+                            src: 'http://ol3js.org/en/master/examples/data/icon.png'
+                        }))
+                    });
 
-                var map = new ol.Map({
-                    target: 'map',
-                    layers: [
-                        new ol.layer.Tile({
-                            source: new ol.source.OSM()
+                    var vectorLayer = new ol.layer.Vector({
+                        source: vectorSource,
+                        style: iconStyle
+                    });
+
+                    var map = new ol.Map({
+                        target: 'map',
+                        layers: [
+                            new ol.layer.Tile({
+                                source: new ol.source.OSM()
+                            }),
+                            vectorLayer
+                        ],
+                        view: new ol.View({
+                            center: ol.proj.transform([{{ location.map_center_longitude }}, {{ location.map_center_latitude }}], 'EPSG:4326', 'EPSG:3857'),
+                            zoom: 14
                         }),
-                        vectorLayer
-                    ],
-                    view: new ol.View({
-                        center: ol.proj.transform([{{ location.map_center_longitude }}, {{ location.map_center_latitude }}], 'EPSG:4326', 'EPSG:3857'),
-                        zoom: 14
-                    }),
-                    controls: ol.control.defaults({
-                        attributionOptions: {
-                            collapsible: false
-                        }
-                    })
-                });
-            </script>
+                        controls: ol.control.defaults({
+                            attributionOptions: {
+                                collapsible: false
+                            }
+                        })
+                    });
+                </script>
+            </div>
         </div>
+    </div>
 {% endblock %}
