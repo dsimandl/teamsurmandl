@@ -28,7 +28,7 @@ class PastLocations(ListView):
 
     template_name = 'location/past_locations.html'
     model = Location
-    paginate_by = 5
+    paginate_by = 1
 
     @method_decorator(csrf_protect)
     @method_decorator(login_required)

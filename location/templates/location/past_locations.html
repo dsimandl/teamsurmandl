@@ -20,10 +20,12 @@
                 </ol>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                {% for location in location_list %}
+        {% for location in location_list %}
+            <div class="row">
+                <div class="col-md-12">
+
                     <h4>{{ location.location_title }}</h4>
+
                     <div id="map" class="map"></div>
                     <script type="text/javascript">
                         var vectorSource = new ol.source.Vector({
@@ -74,8 +76,34 @@
                             })
                         });
                     </script>
-                {% endfor %}
+                </div>
             </div>
-        </div>
+        {% endfor %}
+    {% if is_paginated %}
+            <div class="row">
+                <div class="col-lg-12">
+                    <hr>
+                    <p>
+                    <ul class="pagination">
+                        {% if page_obj.has_previous %}
+                            <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                        {% endif %}
+                        {% for pg in page_obj.paginator.page_range %}
+                            {% if page_obj.number == pg %}
+                                <li class="active"><a href="?page={{ pg }}">{{ pg }}<span
+                                        class="sr-only">(current)</span> </a>
+                                </li>
+                            {% else %}
+                                <li><a href="?page={{ pg }}">{{ pg }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                        {% endif %}
+                    </ul>
+                    </p>
+                </div>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
