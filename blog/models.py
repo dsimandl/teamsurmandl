@@ -58,7 +58,7 @@ class PostComment(models.Model):
     Fairly standard model for the post comments, linked to each post
     """
 
-    created_at = models.DateTimeField(verbose_name='Comment created at',auto_now_add=True, editable=False)
+    created_at = models.DateTimeField(verbose_name='Comment created at', auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
     comment = models.TextField('Comment')
     author = models.ForeignKey(SurmandlUser, related_name='user_comments', verbose_name='Comment author')

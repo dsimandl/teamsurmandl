@@ -13,7 +13,7 @@ $(document).ready(function() {
         })
     });
 
-    $("a#delete_link").click(function(event){
+    $('body').on('click', 'a#delete_link', function(event){
         event.preventDefault();
         $.ajax({
             type: "GET",
@@ -24,11 +24,13 @@ $(document).ready(function() {
         });
     });
 
+
     function appendCommentList(obj){
         event.preventDefault();
-        var new_element = $('<h3 class="list-group-item-heading">' + obj.first_name + " " + obj.last_name + " " +
+        var new_element = $('<div id=' + obj.comment_id + '><div class="well"><h3 class="list-group-item-heading">' + obj.first_name + " " + obj.last_name + " " +
                 '<small>' + obj.created_at + '</small>' + '</h3>' +
-                '<p class="list-group-item-text">' + obj.comment + '</p>');
+                '<p class="list-group-item-text">' + obj.comment +
+            '<br> <a id="delete_link" href="' + obj.delete_url + '">Delete Comment</a></p></div></div>');
         $(".list-group").append(new_element);
 
     }

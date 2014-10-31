@@ -7,8 +7,10 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 from django.http import HttpResponse
+from django.core.urlresolvers import reverse
 
 from taggit.models import Tag
+from pytz import timezone
 
 from .models import Post, PostComment
 from .forms import PostCommentForm
@@ -49,8 +51,9 @@ class AjaxableResponseMixin(object):
     def form_valid(self, form):
         if self.request.is_ajax():
             self.object = form.save()
-            my_datetime = self.object.created_at.strftime("%b. %d, %Y, %I:%M %p")
-            data = {'comment': self.object.comment, 'first_name': self.object.author.first_name, 'last_name': self.object.author.last_name, 'created_at': my_datetime }
+            my_datetime = self.object.created_at.astimezone(timezone('US/Eastern')).strftime("%b. %d, %Y, %I:%M %p")
+            delete_url = reverse('blog:delete', args=(self.object.id,))
+            data = {'comment': self.object.comment, 'first_name': self.object.author.first_name, 'last_name': self.object.author.last_name, 'created_at': my_datetime, 'delete_url': delete_url, 'comment_id': self.object.id }
             return self.render_to_json_response(data)
         else:
             return response

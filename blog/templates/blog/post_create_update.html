@@ -1,5 +1,9 @@
 {% extends "_layouts/base_head_nav.html" %}
 
+{% block other_js_items %}
+    <script src="{{ STATIC_URL }}js/commentwonder.js"></script>
+{% endblock %}
+
 {% block page_content %}
     <div class="container" xmlns="http://www.w3.org/1999/html">
         <div class="row">
@@ -19,42 +23,43 @@
             <div class="col-lg-8">
                 <hr>
                 <p><span class="glyphicon glyphicon-time"></span> Posted on {{ post.created_at }}
-                            by {{ post.author }}</p>
+                    by {{ post.author }}</p>
                 <hr>
                 <p>{{ post.content|safe }}</p>
                 <hr>
                 <div class="well">
                     <h4>Leave a comment</h4>
-                <div id="comment">
-                    <form role="form" enctype="multipart/form-data" method="post" action="#">
-                        <div class="form-group">
-                            {{ form.comment }}
-                            {{ form.post }}
-                            {{ form.author }}
+
+                    <div id="comment">
+                        <form role="form" enctype="multipart/form-data" method="post" action="#">
+                            <div class="form-group">
+                                {{ form.comment }}
+                                {{ form.post }}
+                                {{ form.author }}
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+                <hr>
+                <div class="list-group">
+                    {% for comment in comments %}
+                        <div id="{{ comment.id }}">
+                            <div class="well">
+                                <h3 class="list-group-item-heading">{{ comment.author }}
+                                    <small>{{ comment.created_at }}</small>
+                                </h3>
+                                <p class="list-group-item-text">{{ comment.comment }}
+                                    {% if user.pk == comment.author.pk %}
+                                        <br> <a id="delete_link" href="{% url "blog:delete" comment.id %}">Delete Comment</a>
+                                    {% endif %}
+                                </p>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                    {% endfor %}
                 </div>
             </div>
-            <hr>
-            <div class="list-group">
-            {% for comment in comments %}
-                                <div id="{{ comment.id }}">
-                <div class="well">
-                <h3 class="list-group-item-heading">{{ comment.author }}
-                    <small>{{ comment.created_at }}</small>
-                </h3>
-                <p class="list-group-item-text">{{ comment.comment }}
-                                    {% if user.pk == comment.author.pk %}
-                                        <a id="delete_link" href="{% url "blog:delete" comment.id %}">Delete!</a>
-                {% endif %}
-                </p>
-                </div>
-                </div>
-            {% endfor %}
-           </div>
         </div>
-    </div>
     </div>
 {% endblock %}
 

@@ -14,9 +14,6 @@ class PostCommentForm(forms.ModelForm):
         widgets = {
             'post': forms.HiddenInput(),
             'author': forms.HiddenInput(),
+            'created_at': forms.HiddenInput(),
             'comment': forms.Textarea(attrs={'class': 'form-control', 'rows': '6'}),
         }
-
-
-
-
