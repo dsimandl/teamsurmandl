@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^profile/', include("profiles.urls", namespace="profile"), name="profile"),
     url(r'^gallery/', include("gallery.urls", namespace="gallery"), name="gallery"),
     url(r'^location/', include("location.urls", namespace="location"), name="location"),
+    url(r'^music/', include("music.urls", namespace="music"), name="music"),
     url(r'^avatar/', include('avatar.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
