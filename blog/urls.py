@@ -11,6 +11,6 @@ urlpatterns = patterns('',
                        url(r'^search/$', PostTitleIndexView.as_view(), name="search"),
                        url(r'^(?P<slug>[\w-]+)$', PostDetailView.as_view(), name="edit"),
                        url(r'^tag/(?P<slug>[-\w]+)/$', PostTagIndexView.as_view(), name="tagged"),
-                       url(r'^delete/(?P<id>\d{2})/$', delete_comment, name="delete"),
+                       url(r'^delete/(?P<id>[0-9]+)/$', delete_comment, name="delete"),
                        url(r'^api/', include(post_resource.urls )),
 )

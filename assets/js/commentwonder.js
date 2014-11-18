@@ -26,7 +26,6 @@ $(document).ready(function() {
 
 
     function appendCommentList(obj){
-        event.preventDefault();
         var new_element = $('<div id=' + obj.comment_id + '><div class="well"><h3 class="list-group-item-heading">' + obj.first_name + " " + obj.last_name + " " +
                 '<small>' + obj.created_at + '</small>' + '</h3>' +
                 '<p class="list-group-item-text">' + obj.comment +
