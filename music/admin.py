@@ -5,7 +5,7 @@ import json
 from django.contrib import admin
 
 from .models import Music
-from .rdio_api_confg import CONSUMER_KEY, CONSUMER_SECRET, DEFAULT_ALBUM_IMAGE_URL
+from .rdio_api_config import CONSUMER_KEY, CONSUMER_SECRET, DEFAULT_ALBUM_IMAGE_URL
 
 class MusicAdmin(admin.ModelAdmin):
 
