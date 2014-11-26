@@ -6,7 +6,6 @@
         {% url 'gallery:album' as gallery %}
         {% url 'location:current_location' as current_location %}
         {% url 'location:past_locations' as past_locations %}
-        {% url 'music:music' as music %}
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -65,8 +64,8 @@
                             Listening to <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ music }}">What's David listening to?</a></li>
-                            <li><a href="{{ music }}">What's Jenny listening to?</a></li>
+                            <li><a href="{% url 'music:music' first_name="David" %}">What's David listening to?</a></li>
+                            <li><a href="{% url 'music:music' first_name="Jen" %}">What's Jenny listening to?</a></li>
                         </ul>
                     </li>
                 {% else %}
@@ -75,8 +74,8 @@
                             Listening to <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ music }}">What's David listening to?</a></li>
-                            <li><a href="{{ past_locations }}">What's Jenny listening to?</a></li>
+                            <li><a href="{% url 'music:music' first_name="David" %}">What's David listening to?</a></li>
+                            <li><a href="{% url 'music:music' first_name="Jen" %}">What's Jenny listening to?</a></li>
                         </ul>
                     </li>
                 {% endifequal %}

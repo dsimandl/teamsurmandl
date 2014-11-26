@@ -7,23 +7,37 @@
     <div class="container" xmlns="http://www.w3.org/1999/html" onload="init();">
         <div class="row">
             <div class="col-lg-12">
+                {% if music_list %}
                 <h1 class="page-header">
-                    Team Surmandl Current Location!
+                    What {{ music_list.0.added_by.first_name }} is listening too
                 </h1>
+                {% endif %}
                 <ol class="breadcrumb">
                     <li>
                         <a href="{% url "Home" %}">Home</a>
                     </li>
                     <li class="active">
-                        Current Location
+                        Currently listening to
                     </li>
                 </ol>
             </div>
         </div>
-        <div class="row">
+        <div class="row album-media">
             <div class="col-md-12">
-                <h1>What David and Jenny are listing to is comming soon!</h1>
+                {% for music in music_list %}
+                <div class="media">
+                        <div class="media-img col-sm-3 col-md-2 col-lg-2">
+                        <img width="200" height="200" src="{{ music.album_image_url }}" alt="sugar">
+                        </div>
+                        <div class="media-post col-sm-8 col-md-9 col-lg-9">
+                            <h3>{{ music.song_title }}</h3>
+                            <h5>{{ music.artist_name }} / {{ music.album_name }}</h5>
+                            <p>{{ music.comments }}</p>
+                        </div>
+                </div>
+                    {% empty %}
+                     <h2>No favorite music yet!</h2>
+                {% endfor %}
             </div>
         </div>
-    </div>
 {% endblock %}

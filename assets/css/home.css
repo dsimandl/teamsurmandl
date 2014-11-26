@@ -22,3 +22,33 @@ h1 {
 .carousel .item {
     height: 400px;
 }
+
+.album-media .media {
+    margin-top: 0;
+    margin-bottom: 60px;
+    position: relative;
+    background: #ffffff;
+    border-bottom: solid 1px;
+}
+
+.media-img {
+    height: 200px;
+    width: 200px;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.media-post {
+    padding: 20px 20px 0 20px;
+    overflow: hidden;
+
+}
+
+.media-post h3 {
+    margin-top: 0;
+}
+
+div.media-img img {
+    width: 100%;
+}
