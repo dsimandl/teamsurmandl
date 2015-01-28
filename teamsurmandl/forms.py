@@ -38,6 +38,12 @@ class SurmandlAuthForm(AuthenticationForm):
         username = self.cleaned_data.get('username')
         password = self.cleaned_data.get('password')
 
+        if not username and not password:
+            raise forms.ValidationError("Email address and password are required")
+        elif username and not password:
+            raise forms.ValidationError("Password is required")
+        elif not username and password:
+            raise forms.ValidationError("Email is required")
         if username and password:
             self.user_cache = authenticate(username=username, password=password)
         if self.user_cache is None:
