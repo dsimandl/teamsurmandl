@@ -222,11 +222,6 @@ SOUTH_MIGRATION_MODULES = {
 
 BROKER_URL = BROKER_STR
 
-try:
-    from local_settings import *
-except Exception as e:
-    print e.message
-
 if not DEBUG:
     STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
