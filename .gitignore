@@ -1,0 +1,18 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*__init__.py
+
+teamsurmandl/settings/local_settings.txt
+profiles/migrations/*
+gallery/migrations/*
+gallery/res/*
+blog/migrations/*
+location/migrations/*
+music/migrations/*
+music/rdio_api_config.py
+.idea
+uploads/*
+static/*
+*.dot
+deploy_tools/fabfile.py
