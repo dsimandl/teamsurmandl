@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 from django.http import HttpResponse
 from django.core.urlresolvers import reverse
+from django.core.exceptions import ObjectDoesNotExist
 
 from taggit.models import Tag
 from pytz import timezone
@@ -142,8 +143,10 @@ class PostDetailView(PublishedPostMixin, AjaxableResponseMixin, FormMixin, Detai
 
 
 def delete_comment(request, id):
-        #Try/except here
-        u = PostComment.objects.get(pk=id).delete()
+        try:
+            PostComment.objects.get(pk=id).delete()
+        except ObjectDoesNotExist:
+            pass
         data = {'comment_id': id}
         return HttpResponse(json.dumps(data), content_type='application/json')
 
