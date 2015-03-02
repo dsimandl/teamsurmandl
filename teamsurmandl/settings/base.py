@@ -10,7 +10,7 @@ PROJECT_ROOT = here("..")
 # folder(s) we pass it starting at the parent directory of the current file.
 root = lambda *x: os.path.join(os.path.abspath(PROJECT_ROOT), *x)
 
-DEBUG = False
+DEBUG = True
 
 prod_settings = {}
 with open(root("..", "teamsurmandl/settings/local_settings.txt"), 'rt') as f:
@@ -25,7 +25,7 @@ POSTGRES_USER = prod_settings['POSTGRES_USER']
 POSTGRES_PASSWORD = prod_settings['POSTGRES_PASSWORD']
 BROKER_STR = prod_settings['BROKER_URL']
 
-TEMPLATE_DEBUG = False
+TEMPLATE_DEBUG = True
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -73,9 +73,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = (
-    '/assets/'
-)
+MEDIA_ROOT = root("..", "uploads")
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -86,7 +84,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = root("..", "static/")
+STATIC_ROOT = root("..", "static")
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
