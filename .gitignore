@@ -15,4 +15,3 @@ music/rdio_api_config.py
 uploads/*
 static/*
 *.dot
-deploy_tools/fabfile.py
