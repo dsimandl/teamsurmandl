@@ -52,8 +52,8 @@ def _get_latest_source(source_folder):
 
 def _update_settings(source_folder, site_name):
     settings_path = source_folder + '/teamsurmandl/settings/base.py'
-    sed(settings_path, 'DEBUG = True', 'DEBUG = True')
-    sed(settings_path, 'TEMPLATE_DEBUG = True', 'TEMPLATE_DEBUG = True')
+    sed(settings_path, 'DEBUG = True', 'DEBUG = False')
+    sed(settings_path, 'TEMPLATE_DEBUG = True', 'TEMPLATE_DEBUG = False')
     sed(settings_path, 'MEDIA_ROOT = root("..", "uploads")', 'MEDIA_ROOT = ("/assets/"')
     sed(settings_path, 'STATIC_ROOT = root("..", "static")', 'STATIC_ROOT = root("..", "static/")')
 
