@@ -220,6 +220,8 @@ SOUTH_MIGRATION_MODULES = {
 
 BROKER_URL = BROKER_STR
 
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
+
 if not DEBUG:
     STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
